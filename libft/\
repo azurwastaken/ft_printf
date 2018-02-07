@@ -1,20 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcaseaux <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/29 13:46:38 by mcaseaux          #+#    #+#             */
-/*   Updated: 2018/01/29 14:10:00 by mcaseaux         ###   ########.fr       */
+/*   Created: 2017/07/09 15:39:11 by mcaseaux          #+#    #+#             */
+/*   Updated: 2018/01/26 17:35:01 by mcaseaux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lib_printf.h"
-#include <stdio.h>
-int	 main(void)
+#include "libft.h"
+
+char	*ft_strcpy(char *dest, const char *src)
 {
-	ft_printf("et la JMLP s'exclama %s en toute simplicite\n", "JEANNE OSCOUR");
-	//printf("et la JMLP s'exclama %s en toute simplicite\n", "JEANNE OSCOUR");
-	return(0);
+	int i;
+
+	i = 0;
+	while (src[i] != '\0')
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
 }

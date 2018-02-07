@@ -13,10 +13,26 @@
 #include "lib_printf.h"
 #include <stdio.h>
 
+int		ft_scase(char** buffer,const char* format, char *str)
+{
+	char	*new;
+	int	size;
+
+	size = ft_strcmp(*buffer, format) < 0 ? ft_strlen(format) : ft_strlen(*buffer);
+	if(!(new = (char *)malloc(sizeof(char) * size + ft_strlen(str))))
+		return(1);
+	ft_strcpy(new, *buffer);
+	free(*buffer);
+	ft_strcat(new, str);
+	*buffer = new;
+	return(0);
+}
+
 int		ft_printf(const char * restrict format, ...)
 {
 	char *buffer;
 	int i;
+	char *str;
 	va_list va;
 
 	buffer = NULL;
@@ -32,16 +48,29 @@ int		ft_printf(const char * restrict format, ...)
 			i++;
 			format++;
 		}
-		format++;
-		if(*format == 'c')
+		if(*format != '\0')
 		{
-			buffer[i] = (char) va_arg(va, int);
 			format++;
-			i++;
+			if(*format == 'c')
+			{
+				buffer[i] = (char) va_arg(va, int);
+				format++;
+				i++;
+			}
+			if(*format == 's')
+			{
+				str = va_arg(va, char *);
+				if(ft_scase(&buffer, format, str) != 0)
+					return(0);
+				format++;
+				i += ft_strlen(str);
+			}
+
+
 		}
 	}
-	
 	va_end(va);
 	ft_putstr(buffer);
 	return(0);
+
 }
