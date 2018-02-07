@@ -14,8 +14,7 @@
 #include <stdio.h>
 int	 main(void)
 {
-	int i = 69;
-	ft_printf("je sais compter jusqu'a 7 i%%%%%%",1,2,3,4,5,6,7);
-	printf("j'aime le couscous%dzdouvb",i);
+	ft_printf("arbre %c \n",10000);
+	printf("arbre %c \n",10000);
 	return(0);
 }

@@ -12,7 +12,7 @@
 
 NAME = libft.a
 
-HEADER = libft.h
+HEADER = libft
 
 SRCS =	ft_isalnum.c\
 			ft_isalpha.c\

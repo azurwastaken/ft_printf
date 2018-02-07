@@ -15,23 +15,33 @@
 
 int		ft_printf(const char * restrict format, ...)
 {
-	int c;
-	int i = 0;
+	char *buffer;
+	int i;
 	va_list va;
+
+	buffer = NULL;
+	i = 0;
 	va_start (va, format);
-
-	while(*format++)
+	if(!(buffer = (char *)malloc(sizeof(char) * ft_strlen(format)))) // idk si je doit mettre + 1
+		return(0);
+	while(*format != '\0')
 	{
-		if(*format == '%')
+		while(*format != '%' && *format != '\0')
+		{
+			buffer[i] = *format;
 			i++;
+			format++;
+		}
+		format++;
+		if(*format == 'c')
+		{
+			buffer[i] = (char) va_arg(va, int);
+			format++;
+			i++;
+		}
 	}
-
-	while(i--)
-	{
-		c = va_arg(va, int);
-		printf("%d\n",c);
-	}
-
+	
 	va_end(va);
+	ft_putstr(buffer);
 	return(0);
 }
