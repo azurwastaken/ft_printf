@@ -14,7 +14,7 @@
 #include <stdio.h>
 int	 main(void)
 {
-	ft_printf("et la JMLP s'exclama %s en toute simplicite\n", "JEANNE OSCOUR");
-	//printf("et la JMLP s'exclama %s en toute simplicite\n", "JEANNE OSCOUR");
+	ft_printf("special dedicace a % s et %s les %d meilleurs bros\n", "Abdul", "Maxou", 2);
+	//printf("special dedicace a % s %% et %s les %d meilleurs bros\n", "Abdul", "Maxou", 2);
 	return(0);
 }

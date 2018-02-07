@@ -20,7 +20,7 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	make -C ./libft
 	make -C libft/ clean
-	gcc -Wall -Wextra -Werror $(SRCS) main.c $(LIB) -o $(NAME)
+	gcc -Wall -Wextra -Werror -g $(SRCS) main.c $(LIB) -o $(NAME)
 
 clean:
 	/bin/rm -f $(OBJS)

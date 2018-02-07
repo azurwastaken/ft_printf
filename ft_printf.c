@@ -18,7 +18,7 @@ int		ft_scase(char** buffer,const char* format, char *str)
 	char	*new;
 	int	size;
 
-	size = ft_strcmp(*buffer, format) < 0 ? ft_strlen(format) : ft_strlen(*buffer);
+	size = ft_strcmp(*buffer, format) > 0 ? ft_strlen(format) : ft_strlen(*buffer);
 	if(!(new = (char *)malloc(sizeof(char) * size + ft_strlen(str))))
 		return(1);
 	ft_strcpy(new, *buffer);
@@ -57,7 +57,7 @@ int		ft_printf(const char * restrict format, ...)
 				format++;
 				i++;
 			}
-			if(*format == 's')
+			else if(*format == 's')
 			{
 				str = va_arg(va, char *);
 				if(ft_scase(&buffer, format, str) != 0)
@@ -65,8 +65,25 @@ int		ft_printf(const char * restrict format, ...)
 				format++;
 				i += ft_strlen(str);
 			}
-
-
+			else if(*format == 'd')
+			{
+				str = ft_itoa(va_arg(va, int));
+				if(ft_scase(&buffer, format, str) != 0)
+					return(0);
+				format++;
+				i += ft_strlen(str);
+			}
+			else if(*format == '%')
+			{
+				buffer[i] = *format;
+				i++;
+				format++;
+			}
+			else
+			{
+				ft_printf("error \"%c\" after \"%%\" is undefined\n", *format);
+				return(0);
+			}
 		}
 	}
 	va_end(va);
