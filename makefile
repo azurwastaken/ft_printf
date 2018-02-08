@@ -12,15 +12,15 @@
 
 NAME = ft_printf 
 LIB = ./libft/libft.a
-SRCS = ft_printf.c
-OBJS = ft_printf.o
+SRCS = ft_printf.c main.c
+OBJS = ft_printf.o main.o
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
 	make -C ./libft
 	make -C libft/ clean
-	gcc -Wall -Wextra -Werror -g $(SRCS) main.c $(LIB) -o $(NAME)
+	gcc -Wall -Wextra -Werror -g $(SRCS) $(LIB) -o $(NAME)
 
 clean:
 	/bin/rm -f $(OBJS)

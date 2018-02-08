@@ -13,12 +13,30 @@
 #include "lib_printf.h"
 #include <stdio.h>
 
-char		*ft_convert_base(int num, int base)
+char		*ft_convert_base(long num, int base, char letter)
 {
 	static char 	digit[] = "0123456789ABCDEF";
 	static char 		buffer[50];
 	char 		*res;
+	int i;
 
+	i = 10;
+	if(letter == 'x')
+	{
+		while(i < 16)
+		{
+			digit[i] = ft_tolower(digit[i]);
+			i++;
+		}
+	}
+	else if(letter == 'X')
+	{
+		while(i < 16)
+		{
+			digit[i] = ft_toupper(digit[i]);
+			i++;
+		}
+	}
 	res = &buffer[49];
 	*res = '\0';
 	*--res = digit[num % base];
@@ -71,7 +89,7 @@ int		ft_printf(const char * restrict format, ...)
 			format++;
 			if(*format == 'c')
 			{
-				buffer[i] = (char) va_arg(va, int);
+				buffer[i] = (unsigned char)va_arg(va, int);
 				format++;
 				i++;
 			}
@@ -83,7 +101,7 @@ int		ft_printf(const char * restrict format, ...)
 				format++;
 				i += ft_strlen(str);
 			}
-			else if(*format == 'd')
+			else if(*format == 'd' || *format == 'i')
 			{
 				str = ft_itoa(va_arg(va, int));
 				if(ft_scase(&buffer, format, str) != 0)
@@ -91,14 +109,31 @@ int		ft_printf(const char * restrict format, ...)
 				format++;
 				i += ft_strlen(str);
 			}
-			else if(*format == 'x')
+			else if(*format == 'x' || *format == 'X')
 			{
-				str = ft_convert_base(va_arg(va, int), 16);
+				str = ft_convert_base((long)va_arg(va, unsigned int), 16, *format);
 				if(ft_scase(&buffer, format, str) != 0)
 					return(0);
 				format++;
 				i += ft_strlen(str);
 
+			}
+			else if(*format == 'o')
+			{
+				str = ft_convert_base((long)va_arg(va, unsigned int), 8, *format);
+				if(ft_scase(&buffer, format, str) != 0)
+					return(0);
+				format++;
+				i += ft_strlen(str);
+
+			}
+			else if(*format == 'u')
+			{
+				str = ft_itoa(va_arg(va, unsigned int));
+				if(ft_scase(&buffer, format, str) != 0)
+					return(0);
+				format++;
+				i += ft_strlen(str);
 			}
 			else if(*format == '%')
 			{

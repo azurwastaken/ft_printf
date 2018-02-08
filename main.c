@@ -14,6 +14,7 @@
 #include <stdio.h>
 int	 main(void)
 {
-	ft_printf("0 = %x",'0');
+	wchar_t str[] = {130,130}; 
+	printf("ez %ls\n", str);
 	return(0);
 }
