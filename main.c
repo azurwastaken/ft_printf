@@ -14,7 +14,6 @@
 #include <stdio.h>
 int	 main(void)
 {
-	ft_printf("special dedicace a % s et %s les %d meilleurs bros\n", "Abdul", "Maxou", 2);
-	//printf("special dedicace a % s %% et %s les %d meilleurs bros\n", "Abdul", "Maxou", 2);
+	ft_printf("0 = %x",'0');
 	return(0);
 }

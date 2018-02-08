@@ -13,6 +13,24 @@
 #include "lib_printf.h"
 #include <stdio.h>
 
+char		*ft_convert_base(int num, int base)
+{
+	static char 	digit[] = "0123456789ABCDEF";
+	static char 		buffer[50];
+	char 		*res;
+
+	res = &buffer[49];
+	*res = '\0';
+	*--res = digit[num % base];
+	num = num / base;
+	while(num != 0)
+	{
+		*--res = digit[num % base];
+		num = num / base;
+	}
+	return(res);
+}
+
 int		ft_scase(char** buffer,const char* format, char *str)
 {
 	char	*new;
@@ -72,6 +90,15 @@ int		ft_printf(const char * restrict format, ...)
 					return(0);
 				format++;
 				i += ft_strlen(str);
+			}
+			else if(*format == 'x')
+			{
+				str = ft_convert_base(va_arg(va, int), 16);
+				if(ft_scase(&buffer, format, str) != 0)
+					return(0);
+				format++;
+				i += ft_strlen(str);
+
 			}
 			else if(*format == '%')
 			{
