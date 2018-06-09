@@ -12,65 +12,69 @@
 
 #include "libft.h"
 
-static int		ft_find_next_word(char const *str, int i, char c)
+static size_t	ft_set_array(char **str, char *c, size_t *size, char ***array)
 {
-	while (str[i] == c && str[i] != '\0')
-		i = i + 1;
-	return (i);
-}
-
-static int		ft_count_words(char const *str, char c)
-{
-	int		i;
-	int		words;
-
-	i = 0;
-	words = 0;
-	while (str[i] != '\0')
+	while (**str)
 	{
-		i = ft_find_next_word(str, i, c);
-		words = str[i] != '\0' ? words + 1 : words;
-		while (str[i] != c && str[i] != '\0')
-			i = i + 1;
+		while (**str == *c && **str)
+			*str = *str + 1;
+		if (**str)
+			*size = *size + 1;
+		while (**str != *c && **str)
+			*str = *str + 1;
 	}
-	return (words);
-}
-
-static int		ft_length_act_wrd(char const *str, int i, char c)
-{
-	int		j;
-
-	j = i;
-	while (str[j] != c && str[j] != '\0')
-		j = j + 1;
-	return ((j - i) + 1);
-}
-
-char			**ft_strsplit(char const *s, char c)
-{
-	char	**wd;
-	int		i;
-	int		j;
-	int		k;
-
-	i = 0;
-	j = 0;
-	k = 0;
-	if (!s)
+	if (!(*array = (char **)malloc(sizeof(char *) * (*size + 1))))
 		return (0);
-	if (!(wd = (char **)malloc(sizeof(char*) * ft_count_words(s, c) + 1)))
-		return (NULL);
-	while (j < ft_count_words(s, c))
+	return (1);
+}
+
+static size_t	ft_copy_strings(char **str, char *c, size_t *len, char ***array)
+{
+	while (**str == *c && **str)
+		*str = *str + 1;
+	while (**str != *c && **str)
 	{
-		i = ft_find_next_word(s, i, c);
-		if (!(wd[j] = (char *)malloc(sizeof(char) *
-						(ft_length_act_wrd(s, i, c) + 1))))
-			return (NULL);
-		while (s[i] != c && s[i] != '\0')
-			wd[j][k++] = s[i++];
-		wd[j++][k] = '\0';
-		k = 0;
+		*str = *str + 1;
+		*len = *len + 1;
 	}
-	wd[j] = 0;
-	return (wd);
+	if (!(**array = (char *)malloc(sizeof(char) * (*len + 1))))
+		return (0);
+	*str = *str - *len;
+	while (**str != *c && **str)
+	{
+		***array = **str;
+		**array = **array + 1;
+		*str = *str + 1;
+	}
+	***array = '\0';
+	**array = **array - *len;
+	return (1);
+}
+
+char			**ft_strsplit(const char *s, char c)
+{
+	size_t		size;
+	char		**array;
+	char		*str;
+	size_t		len;
+	size_t		count;
+
+	if (!s)
+		return (NULL);
+	str = (char *)s;
+	size = 0;
+	if (!(ft_set_array(&str, &c, &size, &array)))
+		return (NULL);
+	str = (char *)s;
+	count = size;
+	while (count--)
+	{
+		len = 0;
+		if (!(ft_copy_strings(&str, &c, &len, &array)))
+			return (NULL);
+		array++;
+	}
+	*array = NULL;
+	array = array - size;
+	return (array);
 }

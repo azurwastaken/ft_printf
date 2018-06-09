@@ -13,8 +13,7 @@
 #include "lib_printf.h"
 #include <stdio.h>
 int	 main(void)
-{
-	wchar_t str[] = {130,130}; 
-	printf("ez %ls\n", str);
+{ 
+	ft_printf("% d");
 	return(0);
 }
