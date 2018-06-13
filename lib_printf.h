@@ -20,13 +20,16 @@
 
 typedef struct s_flags
 {
-	int is_flag;
-	int right_just;
-	int en_sign;
-	int spacef;
-	int fill_zero;
-	int precision;
-	int width;
+	int		is_flag;
+	int		right_just;
+	int		en_sign;
+	int		spacef;
+	int		fill_zero;
+	int		precision;
+	int		width;
+	char	*length;
+	int		is_length;
+	char	specifier;
 }	t_flag;
 
 int     ft_printf(const char * restrict format, ...);
