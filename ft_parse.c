@@ -1,12 +1,13 @@
 #include "lib_printf.h"
 
 
-static int is_flag_unint(char c)
+static int is_flag(char c)
 {
 	if(c == 's' || c == 'S'|| c == 'p' || c == 'd' || c == 'D' || c == 'i' || c == 'o' || c == 'O' || c == 'u' || c == 'U' || c == 'x' || c == 'X' || c == 'c' || c == 'C' || c == '%')
 		return(1);
 	return(0);
 }
+
 
 static int		count_flag(char *format)
 {
@@ -14,13 +15,11 @@ static int		count_flag(char *format)
 	int res;
 
 	i = 0;
-	res = 0;
+	res = format[0] == '%' ? 0 : 1;
 	while(format[i] != '\0')
 	{
 		if(format[i] == '%' || format[i] == ' ')
 			res++;
-		if(format[i] == ' ' && is_flag_unint(format[i + 1]))
-			res--;
 		while(format[i] == ' ')
 			i++;
 		i++;
@@ -29,7 +28,7 @@ static int		count_flag(char *format)
 }
 
 
-static char	*get_str(char *format, int *j, t_flag flag)
+static char	*get_str(char *format, int *j)
 {
 	int i;
 	char *str;
@@ -37,7 +36,8 @@ static char	*get_str(char *format, int *j, t_flag flag)
 	i = 0;
 	if(format[0] == '%')
 	{
-	while(!(is_flag_unint(format[i])) && format[i] != '\0')
+		i++;
+	while(!(is_flag(format[i])) && format[i] != '\0')
 		i++;
 	i++;
 	}
@@ -74,6 +74,7 @@ char	**ft_parse(char *format)
 	j = 0;
 	//printf("format = %s\n",format);
 	nb_flag = count_flag(format);
+	printf("nb_flag = %d\n",nb_flag);
 	if(!(split = (char **)malloc(sizeof(char*) * (nb_flag + 1))))
 		return(0);
 	while(i < nb_flag)

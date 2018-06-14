@@ -54,6 +54,50 @@ int		ft_scase(char** buffer,const char* format, char *str)
 	return(0);
 }
 
+static t_flag		*init_t_flag(void)
+{
+	t_flag *flag;
+
+	if(!(flag = malloc(sizeof(t_flag))))
+		return(0);
+	flag->is_flag = 0;
+	flag->right_just = 0;
+	flag->en_sign = 0;
+	flag->spacef = 0;
+	flag->fill_zero = 0;
+	flag->precision = 0;
+	flag->width = 0;
+	flag->length = NULL;
+	flag->is_length = 0;
+	flag->specifier = 0;
+	flag->nb_percent = 0;
+	flag->put_prefix = 0;
+
+	return(flag);
+}
+
+void	ft_buff_test(char *str)
+{
+	t_flag *flag;
+
+	if(!(flag = init_t_flag()))
+		return ;
+	str = parse_flag(str, flag);
+	printf("%s\n",str);
+	printf("is_flag = %d\n",flag->is_flag);
+	printf("right_just = %d\n",flag->right_just);
+	printf("en_sign = %d\n",flag->en_sign);
+	printf("space_f = %d\n",flag->spacef);
+	printf("fill_zero = %d\n",flag->fill_zero);
+	printf("put_prefix = %d\n",flag->put_prefix);
+	printf("precision = %d\n",flag->precision);
+	printf("width = %d\n",flag->width);
+	printf("length = %s\n",flag->length);
+	printf("is_length = %d\n",flag->is_length);
+	printf("specifier = %c\n",flag->specifier);
+	printf("nb_percent = %d\n\n\n",flag->nb_percent);
+}
+
 int		ft_printf(const char * restrict format, ...)
 {
 	int i;
@@ -65,7 +109,10 @@ int		ft_printf(const char * restrict format, ...)
 	str_tab = ft_parse((char *)format);
 	while(str_tab[i] != 0)
 	{
-		printf("%s\n",str_tab[i]);
+		printf("i = %d strtab = %s\n", i, str_tab[i]);
+		if(str_tab[i][0] == '%')
+			ft_buff_test(str_tab[i]);
+		//printf("%s\n",str_tab[i]);
 		i++;
 	}
 	va_end(va);

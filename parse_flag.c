@@ -1,11 +1,12 @@
+#include "lib_printf.h"
 
 char	*parse_flag(char *str, t_flag *flag)
 {
 	int i;
 
-	i = 1;
+	i = 0;
 	flag->is_flag = 0;
-	while(str[i] == '-' || str[i] == '+' || str[i] == ' ' || str[i] == '0' || str[i] == '%')
+	while(str[i] == '-' || str[i] == '+' || str[i] == ' ' || str[i] == '0' || str[i] == '%'|| str[i] == '#')
 	{
 		flag->is_flag = 1;
 		if(str[i] == '-')
@@ -16,9 +17,13 @@ char	*parse_flag(char *str, t_flag *flag)
 			flag->spacef = 1;
 		else if(str[i] == '0')
 			flag->fill_zero = 1;
+		else if(str[i] == '#')
+			flag->put_prefix = 1;
+		else if(str[i] == '%')
+			flag->nb_percent++;
 		i++;
 	}
-	if(flag->right_just = 1)
+	if(flag->right_just == 1)
 		flag->fill_zero = 0;
 	return(parse_width(str, flag, i));
 }
@@ -31,7 +36,7 @@ int		is_prec(char *str)
 	while(str[i] != '\0')
 	{
 		if(str[i] == '.')
-			res = 1;
+			return(1);
 		i++;
 	}
 	return(0);
@@ -57,7 +62,7 @@ char	*parse_width(char *str, t_flag *flag, int i)
 		split = ft_strsplit(str, '.');
 		flag->precision = ft_atoi(split[1]);
 		flag->width = ft_atoi(&split[0][i]);
-		i = ft_strlen(split[0]) + get_end_nb(split[1]);
+		i = ft_strlen(split[0]) + get_end_nb(split[1]) + 1;
 		free(split[1]);
 		free(split[0]);
 		free(split);
@@ -67,10 +72,10 @@ char	*parse_width(char *str, t_flag *flag, int i)
 		flag->width = ft_atoi(&str[i]);
 		i += get_end_nb(&str[i]);
 	}
-	return(parse_length(str, flag));
+	return(parse_length(str, flag, i));
 }
 
-char	*parse_length(char *str, t_flag flag, int i)
+char	*parse_length(char *str, t_flag *flag, int i)
 {
 	if(str[i] == 'h')
 	{
@@ -99,7 +104,7 @@ char	*parse_length(char *str, t_flag flag, int i)
 	return(parse_specifier(str, flag, i));
 }
 
-char	*parse_specifier(char *str, t_flag flag, int i)
+char	*parse_specifier(char *str, t_flag *flag, int i)
 {
 	flag->specifier = str[i];
 	return(str);

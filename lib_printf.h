@@ -25,14 +25,22 @@ typedef struct s_flags
 	int		en_sign;
 	int		spacef;
 	int		fill_zero;
+	int		put_prefix;
 	int		precision;
 	int		width;
 	char	*length;
 	int		is_length;
 	char	specifier;
+	int		nb_percent;
 }	t_flag;
 
 int     ft_printf(const char * restrict format, ...);
 char	**ft_parse(char *format);
+char	*parse_flag(char *str, t_flag *flag);
+int		is_prec(char *str);
+int		get_end_nb(char *str);
+char	*parse_width(char *str, t_flag *flag, int i);
+char	*parse_length(char *str, t_flag *flag, int i);
+char	*parse_specifier(char *str, t_flag *flag, int i);
 
 #endif
