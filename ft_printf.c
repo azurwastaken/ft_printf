@@ -95,7 +95,7 @@ void	ft_buff_test(char *str)
 	printf("length = %s\n",flag->length);
 	printf("is_length = %d\n",flag->is_length);
 	printf("specifier = %c\n",flag->specifier);
-	printf("nb_percent = %d\n\n\n",flag->nb_percent);
+	printf("nb_percent = %d\n",flag->nb_percent);
 }
 
 int		ft_printf(const char * restrict format, ...)
@@ -115,6 +115,7 @@ int		ft_printf(const char * restrict format, ...)
 		//printf("%s\n",str_tab[i]);
 		i++;
 	}
+	printf("\n\n");
 	va_end(va);
 	//ft_putstr(buffer);
 	return(0);

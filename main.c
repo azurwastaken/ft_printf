@@ -15,7 +15,7 @@
 int	 main(void)
 { 
 	ft_printf("%#-.5hhd");
-	ft_printf("coucou les putes%+++++++54.56zx %% sex");
+	ft_printf("coucou les putes%+++++++54.56zx %%% jex");
 	ft_printf("%#-++++.5000hhd");
 	return(0);
 }
