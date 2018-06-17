@@ -16,7 +16,7 @@
 char		*ft_convert_base(long num, int base, char letter)
 {
 	static char 	digit[] = "0123456789ABCDEF";
-	static char 		buffer[50];
+	static char 		buffer[70];
 	char 		*res;
 	int i;
 
@@ -26,7 +26,7 @@ char		*ft_convert_base(long num, int base, char letter)
 		digit[i] = ft_tolower(digit[i]);
 		i++;
 	}
-	res = &buffer[49];
+	res = &buffer[70];
 	*res = '\0';
 	*--res = digit[num % base];
 	num = num / base;
@@ -36,22 +36,6 @@ char		*ft_convert_base(long num, int base, char letter)
 		num = num / base;
 	}
 	return(res);
-}
-
-int		ft_scase(char** buffer,const char* format, char *str)
-{
-	char	*new;
-	int	size;
-
-	size = ft_strcmp(*buffer, format) > 0 ? ft_strlen(format) : ft_strlen(*buffer);
-	if(!(new = (char *)malloc(sizeof(char) * size + ft_strlen(str))))
-		return(1);
-	ft_strcpy(new, *buffer);
-	free(*buffer);
-	ft_strcat(new, str);
-	*buffer = new;
-	free(new);
-	return(0);
 }
 
 static t_flag		*init_t_flag(void)
