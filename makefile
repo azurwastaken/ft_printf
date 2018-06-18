@@ -12,8 +12,8 @@
 
 NAME = ft_printf 
 LIB = ./libft/libft.a
-SRCS = ft_printf.c ft_parse.c parse_flag.c main.c
-OBJS = ft_printf.o main.o ft_parse.o parse_flag.o
+SRCS = ft_printf.c ft_parse.c parse_flag.c main.c lltoa.c
+OBJS = ft_printf.o main.o ft_parse.o parse_flag.o lltoa.o
 
 all: $(NAME)
 

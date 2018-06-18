@@ -25,6 +25,8 @@ char	*parse_flag(char *str, t_flag *flag)
 	}
 	if(flag->right_just == 1)
 		flag->fill_zero = 0;
+	if(flag->en_sign == 1)
+		flag->spacef = 0;
 	return(parse_width(str, flag, i));
 }
 

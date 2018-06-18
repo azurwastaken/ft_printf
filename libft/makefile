@@ -58,6 +58,7 @@ SRCS =	ft_isalnum.c\
 			ft_striter.c\
 			ft_striteri.c\
 			ft_strjoin.c\
+			ft_strjoinfree.c\
 			ft_strlcat.c\
 			ft_strlen.c\
 			ft_strmap.c\
