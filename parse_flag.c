@@ -1,6 +1,6 @@
 #include "lib_printf.h"
 
-char	*parse_flag(char *str, t_flag *flag)
+char	*parse_flag(char *str, t_flag *flag, va_list va)
 {
 	int i;
 
@@ -27,7 +27,7 @@ char	*parse_flag(char *str, t_flag *flag)
 		flag->fill_zero = 0;
 	if(flag->en_sign == 1)
 		flag->spacef = 0;
-	return(parse_width(str, flag, i));
+	return(parse_width(str, flag, i, va));
 }
 
 int		is_prec(char *str)
@@ -49,20 +49,23 @@ int		get_end_nb(char *str)
 	int i;
 
 	i = 0;
-	while(str[i] >= '0' && str[i] <= '9')
+	while(str[i] >= '0' && str[i] <= '9' || str[i] == '*')
 		i++;
 	return(i);
 }
 
-char	*parse_width(char *str, t_flag *flag, int i)
+char	*parse_width(char *str, t_flag *flag, int i, va_list va)
 {
 	char **split;
 
 	flag->precision = 0;
-	if(is_prec(str))
+	if((flag->isprec = is_prec(str)))
 	{
 		split = ft_strsplit(str, '.');
-		flag->precision = ft_atoi(split[1]);
+		if(split[1][0] == '*')
+			flag->precision = va_arg(va, int);
+		else
+			flag->precision = ft_atoi(split[1]);
 		flag->width = ft_atoi(&split[0][i]);
 		i = ft_strlen(split[0]) + get_end_nb(split[1]) + 1;
 		free(split[1]);

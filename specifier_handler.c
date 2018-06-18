@@ -4,11 +4,13 @@
 char		*s_case(char *str, va_list va, t_flag flag)
 {
 	free(str);
-	flag->spacef = 0;
+	flag->fill_zero = 0;
 	if(ft_strcmp(flag->length,"l"))
 		str = ft_strdup(va_arg(va, wchar_t *));
 	else if(flag->length == NULL)
 		str = ft_strdup(va_arg(va, char*));
+	if(str[0] != '\0' && str[0])
+		flag->spacef = 0;
 	return(str);
 }
 
@@ -17,6 +19,7 @@ char		*c_case(char *str, va_list va, t_flag flag)
 	char c;
 	free(str);
 	flag->spacef = 0;
+	flag->fill_zero = 0;
 	if(flag->length == NULL)
 		c = va_arg(va, char);
 	if(ft_strcmp(flag->length,"l") == 0)

@@ -21,11 +21,13 @@
 typedef struct s_flags
 {
 	int		is_flag;
+	int		is_neg;
 	int		right_just;
 	int		en_sign;
 	int		spacef;
 	int		fill_zero;
 	int		put_prefix;
+	int		isprec;
 	int		precision;
 	int		width;
 	char	*length;
