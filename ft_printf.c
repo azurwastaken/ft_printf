@@ -13,7 +13,7 @@
 #include "lib_printf.h"
 #include <stdio.h>
 
-char		*ft_convert_base(long num, int base, char letter)
+char		*ft_convert_base(long long num, int base, char letter)
 {
 	static char 	digit[] = "0123456789ABCDEF";
 	static char 		buffer[70];
@@ -50,6 +50,7 @@ static t_flag		*init_t_flag(void)
 	flag->spacef = 0;
 	flag->fill_zero = 0;
 	flag->precision = 0;
+	flag->isprec = 0;
 	flag->width = 0;
 	flag->length = NULL;
 	flag->is_length = 0;
@@ -60,26 +61,57 @@ static t_flag		*init_t_flag(void)
 	return(flag);
 }
 
-void	ft_buff_test(char *str)
+char	*set_array(char *str, va_list va, t_flag *flag)
+{
+	if(flag->specifier == '%')	
+		str = percent_case(str);
+	else if(flag->specifier == 's')
+		str = s_case(str, va, flag);
+	else if(flag->specifier == 'c')
+		str = c_case(str, va, flag);
+	else if(flag->specifier == 'p')
+		str = p_case(str, va, flag);
+	else if(flag->specifier == 'd')
+		str = d_case(str, va, flag);
+	else if(flag->specifier == 'i')
+		str = d_case(str, va, flag);
+	else if(flag->specifier == 'o')
+		str = oux_case(str, va, flag);
+	else if(flag->specifier == 'u')
+		str = oux_case(str, va, flag);
+	else if(flag->specifier == 'x')
+		str = oux_case(str, va, flag);
+
+	return(str);
+}
+
+char	*ft_buff_test(char *str, va_list va)
 {
 	t_flag *flag;
+	//char *tmp;
 
 	if(!(flag = init_t_flag()))
-		return ;
-	str = parse_flag(str, flag);
-	printf("%s\n",str);
-	printf("is_flag = %d\n",flag->is_flag);
-	printf("right_just = %d\n",flag->right_just);
-	printf("en_sign = %d\n",flag->en_sign);
-	printf("space_f = %d\n",flag->spacef);
-	printf("fill_zero = %d\n",flag->fill_zero);
-	printf("put_prefix = %d\n",flag->put_prefix);
-	printf("precision = %d\n",flag->precision);
-	printf("width = %d\n",flag->width);
-	printf("length = %s\n",flag->length);
-	printf("is_length = %d\n",flag->is_length);
-	printf("specifier = %c\n",flag->specifier);
-	printf("nb_percent = %d\n",flag->nb_percent);
+		return (0);
+	str = parse_flag(str, flag, va);
+	//free(str);
+	//ft_strdel(&str);
+	special_case(flag);
+	str = set_array(str, va, flag);
+	printf("\nmy printf = %s\n", str);
+	return(str);
+	//printf("is_flag = %d\n",flag->is_flag);
+	//printf("right_just = %d\n",flag->right_just);
+	//printf("en_sign = %d\n",flag->en_sign);
+	//printf("space_f = %d\n",flag->spacef);
+	//printf("fill_zero = %d\n",flag->fill_zero);
+	//printf("put_prefix = %d\n",flag->put_prefix);
+	//printf("precision = %d\n",flag->precision);
+	//printf("width = %d\n",flag->width);
+	//printf("length = %s\n",flag->length);
+	//printf("is_length = %d\n",flag->is_length);
+	//printf("specifier = %c\n",flag->specifier);
+	//printf("nb_percent = %d\n",flag->nb_percent);
+
 }
 
 int		ft_printf(const char * restrict format, ...)
@@ -93,13 +125,18 @@ int		ft_printf(const char * restrict format, ...)
 	str_tab = ft_parse((char *)format);
 	while(str_tab[i] != 0)
 	{
-		printf("i = %d strtab = %s\n", i, str_tab[i]);
+		//printf("i = %d strtab = %s\n", i, str_tab[i]);
 		if(str_tab[i][0] == '%')
-			ft_buff_test(str_tab[i]);
-		//printf("%s\n",str_tab[i]);
+			{
+				//str_tab[i] = flag_hub(str);
+				str_tab[i] = ft_buff_test(str_tab[i], va);
+			}	
+		printf("%s\n",str_tab[i]);
+		//free(str_tab[i]);
 		i++;
 	}
-	printf("\n\n");
+	free(str_tab);
+	//printf("\n\n");
 	va_end(va);
 	//ft_putstr(buffer);
 	return(0);

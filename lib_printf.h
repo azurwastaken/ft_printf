@@ -17,6 +17,8 @@
 #include <stdarg.h>
 #include <wchar.h>
 #include <stdio.h>
+#include <sys/types.h>
+#include <stdint.h>
 
 typedef struct s_flags
 {
@@ -38,11 +40,23 @@ typedef struct s_flags
 
 int     ft_printf(const char * restrict format, ...);
 char	**ft_parse(char *format);
-char	*parse_flag(char *str, t_flag *flag);
+char		*ft_convert_base(long long num, int base, char letter);
+char	*parse_flag(char *str, t_flag *flag, va_list va);
 int		is_prec(char *str);
 int		get_end_nb(char *str);
-char	*parse_width(char *str, t_flag *flag, int i);
+char	*parse_width(char *str, t_flag *flag, int i, va_list va);
 char	*parse_length(char *str, t_flag *flag, int i);
 char	*parse_specifier(char *str, t_flag *flag, int i);
+char		*s_case(char *str, va_list va, t_flag *flag);
+char		*c_case(char *str, va_list va, t_flag *flag);
+char		*p_case(char *str, va_list va, t_flag *flag);
+char		*oux_case(char *str, va_list va, t_flag *flag);
+char		*d_case(char *str, va_list va, t_flag *flag);
+char		*percent_case(char *str);
+void		special_case(t_flag *flag);
+char			*ft_lltoa(long long n);
+char	*hashtag_case(char *str, t_flag *flag);
+char	*ft_strfreedup(char *src);
 
+typedef char	*(*t_array)(char*, va_list, t_flag *);
 #endif

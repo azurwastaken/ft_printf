@@ -16,7 +16,7 @@ char		*space_case(char *str, t_flag flag)
 		str = ft_strjoinfree(" ", str);
 }
 
-char		*create_str(char c, int length, int is_neg)
+static char		*create_str(char c, int length, int is_neg)
 {
 	char *str;
 
@@ -48,6 +48,7 @@ char		*zero_case(char *str, t_flag flag)
 				tmp = ft_strjoinfree(create_str('0',width - str_size, is_neg), &str[1]);
 				free(str);
 				str = tmp;
+				str[0] = '-';
 			}
 			else
 				str = ft_strjoinfree(create_str('0',width - str_size, is_neg), &str[0]);

@@ -74,7 +74,7 @@ char	**ft_parse(char *format)
 	j = 0;
 	//printf("format = %s\n",format);
 	nb_flag = count_flag(format);
-	printf("nb_flag = %d\n",nb_flag);
+	//printf("nb_flag = %d\n",nb_flag);
 	if(!(split = (char **)malloc(sizeof(char*) * (nb_flag + 1))))
 		return(0);
 	while(i < nb_flag)

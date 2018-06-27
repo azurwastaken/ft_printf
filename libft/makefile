@@ -126,6 +126,7 @@ OBJS =	ft_isalnum.o\
 			ft_striter.o\
 			ft_striteri.o\
 			ft_strjoin.o\
+			ft_strjoinfree.o\
 			ft_strlcat.o\
 			ft_strlen.o\
 			ft_strmap.o\
@@ -152,7 +153,7 @@ OBJS =	ft_isalnum.o\
 
 all: $(NAME)
 
-$(NAME):
+$(NAME): $(OBJS)
 	gcc -Wall -Wextra -Werror -c $(SRCS) -I $(HEADER)
 	ar rc $(NAME) $(OBJS)
 	ranlib $(NAME)

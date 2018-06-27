@@ -1,4 +1,4 @@
-#include "lib_printf"
+#include "lib_printf.h"
 
 void		special_case(t_flag *flag)
 {

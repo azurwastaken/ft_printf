@@ -49,7 +49,7 @@ int		get_end_nb(char *str)
 	int i;
 
 	i = 0;
-	while(str[i] >= '0' && str[i] <= '9' || str[i] == '*')
+	while((str[i] >= '0' && str[i] <= '9') || str[i] == '*')
 		i++;
 	return(i);
 }

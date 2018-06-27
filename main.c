@@ -14,8 +14,23 @@
 #include <stdio.h>
 int	 main(void)
 { 
-	ft_printf("%#-.5hhd");
-	ft_printf("coucou les putes%+++++++54.56zx %%% jex");
-	ft_printf("%#-++++.5000hhd");
+	int a = 15;
+
+	ft_printf("%d\n",42);
+	printf("%d\n",42);
+	ft_printf("%i\n",42);
+	printf("%i\n",42);
+	ft_printf("%x\n",15);
+	printf("%x\n",15);
+	ft_printf("%c\n",'A');
+	printf("%c\n",'A');
+	ft_printf("%o\n",77);
+	printf("%o\n",77);
+	ft_printf("%u\n",42);
+	printf("%u\n",42);
+	ft_printf("%p\n",&a);
+	printf("%p\n",&a);
+	ft_printf("%s\n","zalu");
+	printf("%s\n","zalu");
 	return(0);
 }
