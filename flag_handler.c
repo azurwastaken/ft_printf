@@ -5,30 +5,33 @@ char		*hashtag_case(char *str, t_flag flag)
 	if(flag->specifier == 'o')
 		flag->precision++;
 	else if(flag->specifier == 'x')
-		str = ft_strjoinfree("0x", str);
+		str = ft_strjoin("0x", str);
 	else if(flag->specifier == 'X')
-		str = ft_strjoinfree("0X", str);
+		str = ft_strjoin("0X", str);
 }
 
 char		*space_case(char *str, t_flag flag)
 {
 	if(str[0] != '-')
-		str = ft_strjoinfree(" ", str);
+		str = ft_strjoin(" ", str);
 }
 
-static char		*create_str(char c, int length, int is_neg)
+char		*create_str(char c, int length, int is_neg)
 {
 	char *str;
 
-	if(!(str != (char *)malloc(sizeof(char) * length + 1)))
+	length += is_neg;
+	if(!(str != (char *)malloc(sizeof(char) * (length + 1))))
 		return(NULL);
 	str[length--] = '\0';
 	while(length > 0)
 		str[length--] = c;
+	if(is_neg)
+		str[0] = '-';
 	return(str);
 }
 
-char		*zero_case(char *str, t_flag flag)
+/*char		*zero_case(char *str, t_flag flag)
 {
 	int str_size;
 	char *tmp;
@@ -55,7 +58,7 @@ char		*zero_case(char *str, t_flag flag)
 		}
 	}
 	return(0);
-}
+}*/
 
 char		*plus_case(char *str)
 {

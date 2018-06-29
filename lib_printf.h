@@ -40,6 +40,7 @@ typedef struct s_flags
 
 int     ft_printf(const char * restrict format, ...);
 char	**ft_parse(char *format);
+char		*create_str(char c, int length);
 char		*ft_convert_base(long long num, int base, char letter);
 char	*parse_flag(char *str, t_flag *flag, va_list va);
 int		is_prec(char *str);
