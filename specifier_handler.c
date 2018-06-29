@@ -37,19 +37,19 @@ char		*d_case(char *str, va_list va, t_flag *flag)
 	free(str);
 	flag->fill_zero = 0;
 	if(flag->length == NULL)
-		str = ft_convert_base((long long)va_arg(va, int), 10, 'd');
+		str = ft_lltoa((long long)va_arg(va, int));
 	else if(ft_strcmp(flag->length,"l") == 0)
-		str = ft_convert_base((long long)va_arg(va, long), 10, 'd');
+		str = ft_lltoa((long long)va_arg(va, long));
 	else if(ft_strcmp(flag->length,"ll") == 0)
-		str = ft_convert_base(va_arg(va, long long), 10, 'd');
+		str = ft_lltoa(va_arg(va, long long));
 	else if(ft_strcmp(flag->length,"h") == 0)
-		str = ft_convert_base((long long)((signed short)va_arg(va, int)), 10, 'd');
+		str = ft_lltoa((long long)((signed short)va_arg(va, int)));
 	else if(ft_strcmp(flag->length,"hh") == 0)
-		str = ft_convert_base((long long)((char)va_arg(va, int)), 10, 'd');
+		str = ft_lltoa((long long)((char)va_arg(va, int)));
 	else if(ft_strcmp(flag->length,"j") == 0)
-		str = ft_convert_base((long long)va_arg(va, intmax_t), 10, 'd');
+		str = ft_lltoa((long long)va_arg(va, intmax_t));
 	else if(ft_strcmp(flag->length,"z") == 0)
-		str = ft_convert_base((long long)va_arg(va, size_t), 10, 'd');
+		str = ft_lltoa((long long)va_arg(va, size_t));
 	
 	return(str);
 }

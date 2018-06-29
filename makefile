@@ -12,8 +12,8 @@
 
 NAME = ft_printf 
 LIB = ./libft/libft.a
-SRCS = ft_printf.c ft_parse.c parse_flag.c main.c ft_lltoa.c specifier.c specifier_handler.c length_handlers.c ft_strfreedup.c
-OBJS = ft_printf.o main.o ft_parse.o parse_flag.o ft_lltoa.o specifier.o specifier_handler.o length_handlers.o ft_strfreedup.o
+SRCS = ft_printf.c ft_parse.c parse_flag.c main.c ft_lltoa.c specifier.c specifier_handler.c length_handlers.c flag_handler.c ft_strfreedup.c
+OBJS = ft_printf.o main.o ft_parse.o parse_flag.o ft_lltoa.o specifier.o specifier_handler.o length_handlers.o flag_handler.o ft_strfreedup.o
 
 all: $(NAME)
 

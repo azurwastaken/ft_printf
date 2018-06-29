@@ -85,6 +85,16 @@ char	*set_array(char *str, va_list va, t_flag *flag)
 	return(str);
 }
 
+char	*printf_hub(char *str, t_flag *flag)
+{
+	if(flag->isprec)
+		str = precision_handler(str, flag);
+	printf("WIDTH = %d\n", flag->width);
+	if(flag->width > 0)
+		str = width_handler(str, flag);
+	return(str);
+}
+
 char	*ft_buff_test(char *str, va_list va)
 {
 	t_flag *flag;
@@ -97,7 +107,9 @@ char	*ft_buff_test(char *str, va_list va)
 	//ft_strdel(&str);
 	special_case(flag);
 	str = set_array(str, va, flag);
+	str = printf_hub(str, flag);
 	printf("\nmy printf = %s\n", str);
+	free(flag);
 	return(str);
 	//printf("is_flag = %d\n",flag->is_flag);
 	//printf("right_just = %d\n",flag->right_just);
@@ -140,5 +152,4 @@ int		ft_printf(const char * restrict format, ...)
 	va_end(va);
 	//ft_putstr(buffer);
 	return(0);
-
 }

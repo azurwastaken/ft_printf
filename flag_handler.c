@@ -1,33 +1,25 @@
 #include "lib_printf.h"
 
-char		*hashtag_case(char *str, t_flag flag)
-{
-	if(flag->specifier == 'o')
-		flag->precision++;
-	else if(flag->specifier == 'x')
-		str = ft_strjoin("0x", str);
-	else if(flag->specifier == 'X')
-		str = ft_strjoin("0X", str);
-}
-
-char		*space_case(char *str, t_flag flag)
+char		*space_case(char *str)
 {
 	if(str[0] != '-')
 		str = ft_strjoin(" ", str);
+	return(str);
 }
 
 char		*create_str(char c, int length, int is_neg)
 {
 	char *str;
+	int i;
 
 	length += is_neg;
-	if(!(str != (char *)malloc(sizeof(char) * (length + 1))))
-		return(NULL);
-	str[length--] = '\0';
-	while(length > 0)
-		str[length--] = c;
+	if(!(str = (char *)malloc(sizeof(char) * length)))
+		return(0);
+	i = 0;
 	if(is_neg)
-		str[0] = '-';
+		str[i++] = '-';
+	while(i < length)
+		str[i++] = c;
 	return(str);
 }
 
@@ -63,5 +55,6 @@ char		*create_str(char c, int length, int is_neg)
 char		*plus_case(char *str)
 {
 	if(str[0] != '-')
-		str = ft_strjoinfree("+", str);
+		str = ft_strjoin("+", str);
+	return(str);
 }

@@ -5,7 +5,7 @@
 	if(flag->en_sign == 1 && is_unint(flag->specifier))
 }*/
 
-char	*is_charset(char c, char *str)
+int		is_charset(char c, char *str)
 {
 	int i;
 
@@ -34,9 +34,10 @@ char	*hashtag_case(char *str, t_flag *flag)
 	return(str);
 }
 
-char	*precision_handler(char *str, t_flag flag)
+char	*precision_handler(char *str, t_flag *flag)
 {
 	int str_len;
+	char *pre;
 
 	str_len = ft_strlen(str);
 	if(is_charset(flag->specifier, "diouxX"))
@@ -44,21 +45,40 @@ char	*precision_handler(char *str, t_flag flag)
 		if(str[0] == '-')
 		{
 			str_len--;
-			str = ft_strjoin(create_str('0', str_len - flag->precision, 1), &str[1]);
+			if((pre = create_str('0',flag->precision - str_len, 1)))
+				str = ft_strjoin(pre, &str[1]);
+		}
+		else
+		{
+			if((pre = create_str('0',flag->precision - str_len, 0)))
+				str = ft_strjoin(pre, &str[0]);
 		}
 	}
+	else if(flag->specifier == 's')
+	{
+		if((int)ft_strlen(str) > flag->precision)
+			str[flag->precision] = '\0';
+	}
+	return(str);
 }
 
-char	*width_handler(char *str, t_flag flag)
+char	*width_handler(char *str, t_flag *flag)
 {
-	if(!(flag->fill_zero))
+	char *pre;
+	int str_len;
+	if(flag->fill_zero != 0)
 	{
-		flag->width -= ft_strlen(str);
-		if(flag->width > 0)
-			str = ft_strjoin(create_str(' ', flag->width),str);
+		flag->precision = str[0] == '-' ? flag->width - 1 : flag->width; 
+		flag->width = 0;
+		str = precision_handler(str, flag);
 	}
 	else
 	{
-
+		str_len = ft_strlen(str);
+		if((pre = create_str(' ',flag->width - str_len, 0)))
+		{
+				str = flag->right_just == 0 ? ft_strjoin(pre, &str[0]) : ft_strjoin(&str[0],pre);
+		}
 	}
+	return(str);
 }

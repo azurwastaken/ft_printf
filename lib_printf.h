@@ -40,7 +40,7 @@ typedef struct s_flags
 
 int     ft_printf(const char * restrict format, ...);
 char	**ft_parse(char *format);
-char		*create_str(char c, int length);
+char		*create_str(char c, int length, int is_neg);
 char		*ft_convert_base(long long num, int base, char letter);
 char	*parse_flag(char *str, t_flag *flag, va_list va);
 int		is_prec(char *str);
@@ -58,6 +58,9 @@ void		special_case(t_flag *flag);
 char			*ft_lltoa(long long n);
 char	*hashtag_case(char *str, t_flag *flag);
 char	*ft_strfreedup(char *src);
+char	*precision_handler(char *str, t_flag *flag);
+char	*width_handler(char *str, t_flag *flag);
+int		is_charset(char c, char *str);
 
 typedef char	*(*t_array)(char*, va_list, t_flag *);
 #endif
