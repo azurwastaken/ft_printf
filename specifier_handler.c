@@ -14,10 +14,35 @@ char		*s_case(char *str, va_list va, t_flag *flag)
 	return(str);
 }
 
+char *ft_print_unicode(wchar_t c, char *str)
+{
+	char tab[4];
+	char tmp[4];
+	int i;
+	int j;
+
+	i = 0;
+	while(i < 4)
+		tab[i++] = 0;
+	i = 0;
+	while (c > 0)
+	{
+		tab[i] = c & 0xff;
+		c = c >> 8;
+		i++;
+	}
+	j = 0;
+	while(i >= 0)
+	{
+		tmp[j++] = tab[i--];
+	}
+	str = ft_strdup((char *)tmp);
+	return(str);
+}
+
 char		*c_case(char *str, va_list va, t_flag *flag)
 {
 	char c;
-	//char *tmp;
 
 	ft_strdel(&str);
 	flag->spacef = 0;
@@ -27,15 +52,14 @@ char		*c_case(char *str, va_list va, t_flag *flag)
 		c = (char)va_arg(va, int);
 		str = ft_strdup(&c);
 	}
-	//if(ft_strcmp(flag->length,"l") == 0)
-	//	c = va_arg(va, wchar_t);
+	if(ft_strcmp(flag->length,"l") == 0)
+		str = ft_print_unicode(va_arg(va, wchar_t), str);
 	return(str);
 }
 
 char		*d_case(char *str, va_list va, t_flag *flag)
 {
 	free(str);
-	flag->fill_zero = 0;
 	if(flag->length == NULL)
 		str = ft_lltoa((long long)va_arg(va, int));
 	else if(ft_strcmp(flag->length,"l") == 0)

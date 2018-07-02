@@ -20,6 +20,7 @@ char		*create_str(char c, int length, int is_neg)
 		str[i++] = '-';
 	while(i < length)
 		str[i++] = c;
+	str[i] = '\0';
 	return(str);
 }
 

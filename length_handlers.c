@@ -66,7 +66,7 @@ char	*width_handler(char *str, t_flag *flag)
 {
 	char *pre;
 	int str_len;
-	if(flag->fill_zero != 0)
+	if(flag->fill_zero == 1)
 	{
 		flag->precision = str[0] == '-' ? flag->width - 1 : flag->width; 
 		flag->width = 0;

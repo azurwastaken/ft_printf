@@ -89,7 +89,6 @@ char	*printf_hub(char *str, t_flag *flag)
 {
 	if(flag->isprec)
 		str = precision_handler(str, flag);
-	printf("WIDTH = %d\n", flag->width);
 	if(flag->width > 0)
 		str = width_handler(str, flag);
 	return(str);
@@ -103,53 +102,48 @@ char	*ft_buff_test(char *str, va_list va)
 	if(!(flag = init_t_flag()))
 		return (0);
 	str = parse_flag(str, flag, va);
-	//free(str);
-	//ft_strdel(&str);
 	special_case(flag);
 	str = set_array(str, va, flag);
 	str = printf_hub(str, flag);
-	printf("\nmy printf = %s\n", str);
 	free(flag);
 	return(str);
-	//printf("is_flag = %d\n",flag->is_flag);
-	//printf("right_just = %d\n",flag->right_just);
-	//printf("en_sign = %d\n",flag->en_sign);
-	//printf("space_f = %d\n",flag->spacef);
-	//printf("fill_zero = %d\n",flag->fill_zero);
-	//printf("put_prefix = %d\n",flag->put_prefix);
-	//printf("precision = %d\n",flag->precision);
-	//printf("width = %d\n",flag->width);
-	//printf("length = %s\n",flag->length);
-	//printf("is_length = %d\n",flag->is_length);
-	//printf("specifier = %c\n",flag->specifier);
-	//printf("nb_percent = %d\n",flag->nb_percent);
+}
 
+int 	ft_print_str(char *str)
+{
+	int i;
+	int j;
+
+	j = 0;
+	i = ft_strlen(str);
+	while(j < i)
+	{
+		write(1, &str[j], 1);
+		j++;
+	}
+	return(i);
 }
 
 int		ft_printf(const char * restrict format, ...)
 {
 	int i;
+	int res;
 	char **str_tab;
 	va_list va;
 
 	i = 0;
+	res = 0;
 	va_start (va, format);
 	str_tab = ft_parse((char *)format);
 	while(str_tab[i] != 0)
 	{
-		//printf("i = %d strtab = %s\n", i, str_tab[i]);
 		if(str_tab[i][0] == '%')
-			{
-				//str_tab[i] = flag_hub(str);
 				str_tab[i] = ft_buff_test(str_tab[i], va);
-			}	
-		printf("%s\n",str_tab[i]);
-		//free(str_tab[i]);
+		res += ft_print_str(str_tab[i]);
 		i++;
 	}
 	free(str_tab);
-	//printf("\n\n");
 	va_end(va);
 	//ft_putstr(buffer);
-	return(0);
+	return(res);
 }

@@ -13,16 +13,30 @@ static int		count_flag(char *format)
 {
 	int i;
 	int res;
+	int flag;
 
 	i = 0;
+	flag = 0;
 	res = format[0] == '%' ? 0 : 1;
 	while(format[i] != '\0')
 	{
 		if(format[i] == '%' || format[i] == ' ')
+		{
 			res++;
-		while(format[i] == ' ')
+			if(format[i] == '%')
+				flag = 1;
+			while(flag == 1 && format[i] != '\0' && !(is_flag(format[i])))
+				i++;
+			res = (flag == 1 && format[i] != '\0') ? res + 1 : res;
+			flag = 0;
+		}
+		if(format[i] == ' ')
+		{
+			while(format[i] == ' ')
+				i++;
+		}
+		else
 			i++;
-		i++;
 	}
 	return(res);
 }
@@ -74,7 +88,6 @@ char	**ft_parse(char *format)
 	j = 0;
 	//printf("format = %s\n",format);
 	nb_flag = count_flag(format);
-	//printf("nb_flag = %d\n",nb_flag);
 	if(!(split = (char **)malloc(sizeof(char*) * (nb_flag + 1))))
 		return(0);
 	while(i < nb_flag)
