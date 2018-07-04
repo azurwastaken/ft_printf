@@ -62,6 +62,8 @@ char	*ft_strfreedup(char *src);
 char	*precision_handler(char *str, t_flag *flag);
 char	*width_handler(char *str, t_flag *flag);
 int		is_charset(char c, char *str);
+t_flag		*init_t_flag(void);
+int		ft_print_str(char *str);
 
 typedef char	*(*t_array)(char*, va_list, t_flag *);
 #endif
