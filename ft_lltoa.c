@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_lltoa.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcaseaux <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/07/04 10:46:56 by mcaseaux          #+#    #+#             */
+/*   Updated: 2018/07/04 10:48:10 by mcaseaux         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lib_printf.h"
 
 static int		ft_count_digit(long long nbr)
@@ -19,8 +31,8 @@ static int		ft_count_digit(long long nbr)
 
 char			*ft_lltoa(long long n)
 {
-	char	*str;
-	int		i;
+	char		*str;
+	int			i;
 	long long	nb;
 
 	if (n == 0)

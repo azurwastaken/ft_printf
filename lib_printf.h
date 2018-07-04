@@ -38,6 +38,7 @@ typedef struct s_flags
 	int		nb_percent;
 }	t_flag;
 
+int		is_flag(char c);
 int     ft_printf(const char * restrict format, ...);
 char	**ft_parse(char *format);
 char		*create_str(char c, int length, int is_neg);

@@ -14,13 +14,15 @@
 #include <stdio.h>
 int	 main(void)
 { 
-	wint_t i = 0b111000011000100010110100;
+	//wint_t i = 0b111000011000100010110100;
 	//int raisin;
 	//int resde;
 
 	//raisin = 
-	ft_printf("%lc",i);
-	printf("%lc\n",0b111000011000100010110100);
+	ft_printf("ZALU LES POTE%d HEHE\n",42);
+	printf("ZALU LES POTE%d HEHE\n",42);
+	ft_printf("ZALU LES POTE%d HEHE\n",42);
+	printf("ZALU LES POTE%d HEHE\n",42);
 	//ft_printf("%.8s\n","coucou");
 	//printf("raisin = %d\nresde = %d",raisin,resde);
 	return(0);

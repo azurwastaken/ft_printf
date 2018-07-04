@@ -1,13 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_parse.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcaseaux <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/07/04 10:49:11 by mcaseaux          #+#    #+#             */
+/*   Updated: 2018/07/04 10:57:57 by mcaseaux         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lib_printf.h"
-
-
-static int is_flag(char c)
-{
-	if(c == 's' || c == 'S'|| c == 'p' || c == 'd' || c == 'D' || c == 'i' || c == 'o' || c == 'O' || c == 'u' || c == 'U' || c == 'x' || c == 'X' || c == 'c' || c == 'C' || c == '%')
-		return(1);
-	return(0);
-}
-
 
 static int		count_flag(char *format)
 {
@@ -18,66 +21,77 @@ static int		count_flag(char *format)
 	i = 0;
 	flag = 0;
 	res = format[0] == '%' ? 0 : 1;
-	while(format[i] != '\0')
+	while (format[i] != '\0')
 	{
-		if(format[i] == '%' || format[i] == ' ')
+		if (format[i] == '%' || format[i] == ' ')
 		{
 			res++;
-			if(format[i] == '%')
-				flag = 1;
-			while(flag == 1 && format[i] != '\0' && !(is_flag(format[i])))
+			flag = format[i] == '%' ? 1 : 0;
+			while (flag == 1 && format[i] != '\0' && !(is_flag(format[i])))
 				i++;
 			res = (flag == 1 && format[i] != '\0') ? res + 1 : res;
 			flag = 0;
 		}
-		if(format[i] == ' ')
-		{
-			while(format[i] == ' ')
+		if (format[i] == ' ')
+			while (format[i] == ' ')
 				i++;
-		}
 		else
 			i++;
 	}
-	return(res);
+	return (res);
 }
 
-
-static char	*get_str(char *format, int *j)
+static int		if_percent(char *format)
 {
 	int i;
-	char *str;
 
 	i = 0;
-	if(format[0] == '%')
-	{
-		i++;
-	while(!(is_flag(format[i])) && format[i] != '\0')
+	i++;
+	while (!(is_flag(format[i])) && format[i] != '\0')
 		i++;
 	i++;
-	}
-	else
+	return (i);
+}
+
+static int		if_not_percent(char *format)
+{
+	int i;
+
+	i = 0;
+	if (format[0] == ' ')
 	{
-		if(format[0] == ' ')
-		{
-		while(format[i] == ' ')
-			i++;
-		}
-		while(format[i] != '%' && format[i] != '\0' && format[i] != ' ')
+		while (format[i] == ' ')
 			i++;
 	}
-	if(!(str = (char *)malloc(sizeof(char) * (i + 1))))
-		return(0);
+	while (format[i] != '%' && format[i] != '\0' && format[i] != ' ')
+		i++;
+	return (i);
+}
+
+static char		*get_str(char *format, int *j)
+{
+	int		i;
+	char	*str;
+
+	i = 0;
+	if (format[0] == '%')
+		i = if_percent(format);
+	else
+		i = if_not_percent(format);
+	if (!(str = (char *)malloc(sizeof(char) * (i + 1))))
+		return (0);
 	str[i] = '\0';
 	*j = i == 0 ? *j + 1 : *j + i;
 	i--;
-	while(i >= 0)
+	while (i >= 0)
 	{
 		str[i] = format[i];
 		i--;
 	}
-	return(str);
+	return (str);
 }
-char	**ft_parse(char *format)
+
+char			**ft_parse(char *format)
 {
 	char	**split;
 	int		nb_flag;
@@ -86,15 +100,14 @@ char	**ft_parse(char *format)
 
 	i = 0;
 	j = 0;
-	//printf("format = %s\n",format);
 	nb_flag = count_flag(format);
-	if(!(split = (char **)malloc(sizeof(char*) * (nb_flag + 1))))
-		return(0);
-	while(i < nb_flag)
+	if (!(split = (char **)malloc(sizeof(char*) * (nb_flag + 1))))
+		return (0);
+	while (i < nb_flag)
 	{
-		split[i] = get_str(&format[j],&j);
+		split[i] = get_str(&format[j], &j);
 		i++;
 	}
 	split[i] = NULL;
-	return(split);
+	return (split);
 }

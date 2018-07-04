@@ -15,13 +15,13 @@
 
 char		*ft_convert_base(long long num, int base, char letter)
 {
-	static char 	digit[] = "0123456789ABCDEF";
-	static char 		buffer[70];
+	static char	digit[] = "0123456789ABCDEF";
+	static char	buffer[70];
 	char 		*res;
-	int i;
+	int			i;
 
 	i = 10;
-	while(i < 16 && letter == 'x')
+	while (i < 16 && letter == 'x')
 	{
 		digit[i] = ft_tolower(digit[i]);
 		i++;
