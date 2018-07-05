@@ -77,10 +77,17 @@ char	*width_handler(char *str, t_flag *flag)
 	{
 		flag->precision = str[0] == '-' ? flag->width - 1 : flag->width;
 		flag->width = 0;
+		if(flag->put_prefix == 1 && is_charset(flag->specifier, "oxXp"))
+				flag->precision = flag->specifier == 'o' ? flag->precision - 1 : flag->precision - 2;
 		str = precision_handler(str, flag);
+		if(flag->put_prefix == 1 && is_charset(flag->specifier, "oxXp"))
+			str = hashtag_case(str, flag);
+
 	}
 	else
 	{
+		if(flag->put_prefix == 1 && is_charset(flag->specifier, "oxXp"))
+			str = hashtag_case(str, flag);
 		str_len = ft_strlen(str);
 		if ((pre = create_str(' ', flag->width - str_len, 0)))
 		{

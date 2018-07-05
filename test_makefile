@@ -1,0 +1,33 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: mcaseaux <mcaseaux@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2017/11/22 14:14:51 by mcaseaux          #+#    #+#              #
+#    Updated: 2018/01/29 12:01:46 by mcaseaux         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+NAME = ft_printf 
+LIB = ./libft/libft.a
+SRCS = ft_printf.c ft_parse.c parse_flag.c main.c ft_lltoa.c specifier.c specifier_handler.c length_handlers.c flag_handler.c ft_strfreedup.c
+OBJS = ft_printf.o main.o ft_parse.o parse_flag.o ft_lltoa.o specifier.o specifier_handler.o length_handlers.o flag_handler.o ft_strfreedup.o
+
+all: $(NAME)
+
+$(NAME): $(OBJS)
+	make -C ./libft
+	make -C libft/ clean
+	gcc -Wall -Wextra -Werror -g $(SRCS) $(LIB) -o $(NAME)
+
+clean:
+	/bin/rm -f $(OBJS)
+	make -C libft/ clean
+
+fclean: clean
+	/bin/rm -f $(NAME)
+	make -C libft/ fclean
+
+re: fclean all

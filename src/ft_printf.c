@@ -56,7 +56,7 @@ char	*set_array(char *str, va_list va, t_flag *flag)
 		str = oux_case(str, va, flag);
 	else if (flag->specifier == 'u')
 		str = oux_case(str, va, flag);
-	else if (flag->specifier == 'x')
+	else if (flag->specifier == 'x' || flag->specifier == 'X')
 		str = oux_case(str, va, flag);
 	return (str);
 }
@@ -67,6 +67,8 @@ char	*printf_hub(char *str, t_flag *flag)
 		str = precision_handler(str, flag);
 	if (flag->width > 0)
 		str = width_handler(str, flag);
+	else if(flag->put_prefix)
+		str = hashtag_case(str, flag);
 	return (str);
 }
 
@@ -93,9 +95,11 @@ int		ft_printf(const char *restrict format, ...)
 
 	i = 0;
 	res = 0;
+	if(format == NULL)
+		return(0);
 	va_start(va, format);
 	str_tab = ft_parse((char *)format);
-	while (str_tab[i] != 0)
+	while (str_tab[i])
 	{
 		if (str_tab[i][0] == '%')
 			str_tab[i] = ft_buff_test(str_tab[i], va);

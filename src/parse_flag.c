@@ -30,9 +30,9 @@ char	*parse_flag(char *str, t_flag *flag, va_list va)
 			flag->fill_zero = 1;
 		else if (str[i] == '#')
 			flag->put_prefix = 1;
-		else if (str[i] == '%')
-			flag->nb_percent++;
 		i++;
+		if (str[i] == '%')
+			return(parse_specifier(str, flag, i));
 	}
 	if (flag->right_just == 1)
 		flag->fill_zero = 0;

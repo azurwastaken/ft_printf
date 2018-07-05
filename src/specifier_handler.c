@@ -53,18 +53,19 @@ char *ft_print_unicode(wchar_t c, char *str)
 
 char		*c_case(char *str, va_list va, t_flag *flag)
 {
-	char c;
+	char c[2];
 
+	c[1] = '\0';
 	ft_strdel(&str);
 	flag->spacef = 0;
 	flag->fill_zero = 0;
 	if (flag->length == NULL)
 	{
-		c = (char)va_arg(va, int);
-		str = ft_strdup(&c);
+		c[0] = (char)va_arg(va, int);
+		str = ft_strdup((char *)c);
 	}
-	if (ft_strcmp(flag->length, "l") == 0)
-		str = ft_print_unicode(va_arg(va, wchar_t), str);
+	else if (ft_strcmp(flag->length, "l") == 0)
+			str = ft_print_unicode(va_arg(va, wint_t), str);
 	return (str);
 }
 
@@ -92,7 +93,6 @@ char		*oux_case(char *str, va_list va, t_flag *flag)
 {
 	int base;
 
-	flag->fill_zero = 0;
 	if (flag->specifier == 'x' || flag->specifier == 'X')
 		base = 16;
 	else if (flag->specifier == 'o' || flag->specifier == 'O')
@@ -116,6 +116,7 @@ char		*oux_case(char *str, va_list va, t_flag *flag)
 		str = ft_convert_base((long)va_arg(va, size_t), base, flag->specifier);
 	else if (flag->length == NULL)
 		str = ft_convert_base((long)va_arg(va, unsigned int), base, flag->specifier);
+	flag->put_prefix = str[0] == '0' ? 0 : flag->put_prefix;
 	return (str);
 }
 

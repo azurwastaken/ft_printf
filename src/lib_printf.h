@@ -13,7 +13,7 @@
 #ifndef LIB_PRINTF_H
 # define LIB_PRINTF_H
 
-#include "./libft/libft.h"
+#include "../libft/libft.h"
 #include <stdarg.h>
 #include <wchar.h>
 #include <stdio.h>
