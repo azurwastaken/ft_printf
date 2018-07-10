@@ -37,7 +37,8 @@ char			*ft_lltoa(long long n)
 
 	if (n == 0)
 	{
-		str = malloc(sizeof(char) * 2);
+		if (!(str = malloc(sizeof(char) * 2)))
+			return (NULL);
 		str[0] = '0';
 		str[1] = '\0';
 		return (str);

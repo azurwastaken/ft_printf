@@ -62,6 +62,7 @@ char		*c_case(char *str, va_list va, t_flag *flag)
 
 char		*d_case(char *str, va_list va, t_flag *flag)
 {
+
 	if (flag->length == NULL)
 		str = ft_lltoa((long long)va_arg(va, int));
 	else if (ft_strcmp(flag->length, "l") == 0)
@@ -114,7 +115,9 @@ char		*oux_case(char *str, va_list va, t_flag *flag)
 char		*p_case(char *str, va_list va, t_flag *flag)
 {
 	if (flag->length == NULL)
-		str = hashtag_case(ft_convert_base((long)va_arg(va, void *), 16, 'x'), flag);
+		str = ft_convert_base((long)va_arg(va, void *), 16, 'x');
+	flag->specifier = 'x';
+	flag->put_prefix = 1;
 	return (str);
 }
 

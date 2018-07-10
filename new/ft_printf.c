@@ -5,6 +5,7 @@ int		ft_printf(const char *restrict format, ...)
 	t_flag *flag;
 	va_list va;
 
+	va_start(va, format);
 	flag = init_t_flag();
 	if(!format)
 		return(0);
@@ -27,6 +28,7 @@ int		ft_printf(const char *restrict format, ...)
 			flag->i = 0;
 		// commencer le traitement
 			format++;
+			format = parse_flag((char *)format, flag);
 			while(!is_charset(*format,"sSpdDioOuUxXcC%") && *format != '\0')
 			{
 				format = parse_flag((char *)format, flag);

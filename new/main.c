@@ -2,6 +2,6 @@
 
 int main(void)
 {
-	ft_printf("coucou jo%dr 2",42);
+	ft_printf("coucou jo%#05Xr 2", 0xff);
 	return(0);
 }

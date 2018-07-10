@@ -58,5 +58,8 @@ char		*p_case(char *str, va_list va, t_flag *flag);
 char		*percent_case(char *str);
 char	*ft_convert_base(long long num, int base, char letter);
 char			*ft_lltoa(long long n);
+void	put_flag(t_flag *flag, va_list va);
+int		calc_len(t_flag *flag, int str_len);
+void	test_t_flag(t_flag *flag);
 
 #endif
