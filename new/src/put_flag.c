@@ -35,7 +35,7 @@ void	put_flag(t_flag *flag, va_list va)
 	i = 0;
 	tmp = func_hub(va, flag);
 	save = ft_strlen(tmp);
-	if(!(str = (char *)malloc(sizeof(char) * (calc_len(flag, save) * 2))))
+	if(!(str = (char *)malloc(sizeof(char) * (calc_len(flag, save)))))
 		return ;
 	if(flag->en_sign && tmp[0] != '-' && is_charset(flag->specifier,"dDi"))
 		str[i++] = '+';
@@ -50,11 +50,13 @@ void	put_flag(t_flag *flag, va_list va)
 		str[i++] = '0';
 		if(is_charset(flag->specifier,"xX"))
 			str[i++] = flag->specifier == 'x' ? 'x' : 'X';
+		printf("ZALU\n");
 	}
 	if (flag->isprec && is_charset(flag->specifier,"pdDioOuUxX"))
 	{
-		while(i < (flag->precision - save + i))
+		while(i < (flag->precision))
 			str[i++] = '0';
+		printf("ZALU 2\n");
 	}
 	else if (flag->isprec && flag->specifier == 's')
 	{
@@ -67,12 +69,16 @@ void	put_flag(t_flag *flag, va_list va)
 	}
 	else if ((!flag->isprec) && flag->fill_zero == 1)
 	{
-		while(i < (flag->width - save + i))
+		while(i < (flag->width - save))
 			str[i++] = '0';
+		printf("ZALU3\n");
 	}
+	printf("ENDIF\n");
 	// add str
 	while(*tmp)
 		str[i++] = *tmp++;
+	str[i] = '\0';
+	printf("ZALU 4\n");
 	//print width
 	save = ft_strlen(str);
 	i = 0;
@@ -81,6 +87,7 @@ void	put_flag(t_flag *flag, va_list va)
 		write(1," ",1);
 		i++;
 	}
+	printf("ZALU5\n");
 	ft_putstr(str);
 	if(str[0] != '\0')
 		ft_strdel(&str);

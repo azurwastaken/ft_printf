@@ -29,10 +29,13 @@ int		ft_printf(const char *restrict format, ...)
 		// commencer le traitement
 			format++;
 			format = parse_flag((char *)format, flag);
+			printf("PTAAAAAAIn\n");
 			while(!is_charset(*format,"sSpdDioOuUxXcC%") && *format != '\0')
 			{
 				format = parse_flag((char *)format, flag);
+				printf("OLE\n");
 			}
+			printf("ALLO\n");
 			if(is_charset(*format,"sSpdDioOuUxXcC%"))
 				flag->specifier = *format++;
 			put_flag(flag, va);

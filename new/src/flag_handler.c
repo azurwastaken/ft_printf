@@ -4,6 +4,7 @@ char	*func_hub(va_list va, t_flag *flag)
 {
 	char *str;
 
+	str = NULL;
 	if (flag->specifier == '%')
 		str = percent_case(str);
 	else if (flag->specifier == 's')

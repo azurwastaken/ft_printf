@@ -1,7 +1,8 @@
-#include "lib_printf.h"
+#include "./src/lib_printf.h"
 
 int main(void)
 {
-	ft_printf("coucou jo%#05Xr 2", 0xff);
+	ft_printf("%jx", 4294967295);
+	printf("%jx", 4294967295);
 	return(0);
 }
