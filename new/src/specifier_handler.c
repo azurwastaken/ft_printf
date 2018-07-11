@@ -68,13 +68,13 @@ char		*d_case(char *str, va_list va, t_flag *flag)
 	else if (ft_strcmp(flag->length, "l") == 0)
 		str = ft_lltoa((long long)va_arg(va, long));
 	else if (ft_strcmp(flag->length, "ll") == 0)
-		str = ft_lltoa(va_arg(va, long long));
+		str = ft_convert_bde(va_arg(va, long long), 10, 'd');
 	else if (ft_strcmp(flag->length, "h") == 0)
 		str = ft_lltoa((long long)((signed short)va_arg(va, int)));
 	else if (ft_strcmp(flag->length, "hh") == 0)
 		str = ft_lltoa((long long)((char)va_arg(va, int)));
 	else if (ft_strcmp(flag->length, "j") == 0)
-		str = ft_lltoa((long long)va_arg(va, intmax_t));
+		str = ft_convert_bde((long long)va_arg(va, intmax_t), 10, 'd');
 	else if (ft_strcmp(flag->length, "z") == 0)
 		str = ft_lltoa((long long)va_arg(va, size_t));
 	if(str[0] == '0' && flag->isprec && flag->precision == 0)
@@ -95,7 +95,7 @@ char		*oux_case(char *str, va_list va, t_flag *flag)
 	if (flag->length == NULL)
 		str = ft_convert_base((long)va_arg(va, unsigned int), base, flag->specifier);
 	else if (ft_strcmp(flag->length, "l") == 0)
-		str = ft_convert_base((long)va_arg(va, unsigned long), base, flag->specifier);
+		str = ft_convert_base((unsigned long long)va_arg(va, unsigned long), base, flag->specifier);
 	else if (ft_strcmp(flag->length, "ll") == 0)
 		str = ft_convert_base((long)va_arg(va, unsigned long long), base, flag->specifier);
 	else if (ft_strcmp(flag->length, "h") == 0)

@@ -62,5 +62,6 @@ char			*ft_lltoa(long long n);
 void	put_flag(t_flag *flag, va_list va);
 int		calc_len(t_flag *flag, int str_len);
 void	test_t_flag(t_flag *flag);
+char	*ft_convert_bde(long long num, int base, char letter);
 
 #endif

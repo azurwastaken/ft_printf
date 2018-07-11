@@ -1,10 +1,23 @@
 #include "lib_printf.h"
 
+static char *ft_strfreecopy(char *src)
+{
+	if(src)
+		ft_strdel(&src);
+	src = ft_strdup("l\0");
+	return(src);
+}
+
 char	*func_hub(va_list va, t_flag *flag)
 {
 	char *str;
 
 	str = NULL;
+	if(flag->specifier == 'D' || flag->specifier == 'O' || flag->specifier == 'U')
+	{
+		flag->specifier = ft_tolower(flag->specifier);
+		flag->length = ft_strfreecopy(flag->length);
+	}
 	if (flag->specifier == '%')
 		str = percent_case(str);
 	else if (flag->specifier == 's')

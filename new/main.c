@@ -2,7 +2,9 @@
 
 int main(void)
 {
-ft_printf("maxou va avoir %+0.0d\n", 0);
-printf("maxou va avoir %+0.0d\n", 0);
+ft_printf("%U\n", 4294967296);
+printf("%U\n", 4294967296);
+ft_printf("%lu\n", 4294967296);
+ft_printf("%lu\n", 4294967296);
 	return(0);
 }
