@@ -63,12 +63,12 @@ char	*parse_length(char *format, t_flag *flag)
 	else if (*format == 'j')
 	{
 		flag->length = ft_strdup("j");
-		flag->is_length = 1;
+		format += (flag->is_length = 1);
 	}
 	else if (*format == 'z')
 	{
 		flag->length = ft_strdup("z");
-		flag->is_length = 1;
+		format += (flag->is_length = 1);
 	}
 	else
 		flag->is_length = 0;

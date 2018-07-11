@@ -14,7 +14,7 @@ int		is_charset(char c, char *str)
 	return (0);
 }
 
-char	*ft_convert_base(long long num, int base, char letter)
+char	*ft_convert_base(unsigned long long num, int base, char letter)
 {
 	static char	digit[] = "0123456789ABCDEF";
 	static char	buffer[70];

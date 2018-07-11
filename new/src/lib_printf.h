@@ -39,6 +39,7 @@ typedef struct s_flags
 	long long save;
 	char	buffer[4096];
 	int		i;
+	int		res;
 }	t_flag;
 
 t_flag	*init_t_flag(void);
@@ -56,7 +57,7 @@ char		*d_case(char *str, va_list va, t_flag *flag);
 char		*oux_case(char *str, va_list va, t_flag *flag);
 char		*p_case(char *str, va_list va, t_flag *flag);
 char		*percent_case(char *str);
-char	*ft_convert_base(long long num, int base, char letter);
+char	*ft_convert_base(unsigned long long num, int base, char letter);
 char			*ft_lltoa(long long n);
 void	put_flag(t_flag *flag, va_list va);
 int		calc_len(t_flag *flag, int str_len);

@@ -42,21 +42,30 @@ void	put_flag(t_flag *flag, va_list va)
 	// s'occuper des 0;
 	if (is_charset(flag->specifier,"pdDi"))
 	{
-		str[0] = tmp[0] == '-' ? '-' : 0;
-		i = tmp[0] == '-' ? 1 : 0;
+		if(tmp[0] == '-')
+		{
+			str[0] = *tmp;
+			i = 1;
+			tmp++;
+			save -= 2;
+		}
+		else if (flag->en_sign || flag->spacef)
+		{
+			str[0] = flag->en_sign && !(flag->spacef) ? '+' : ' ';
+			i = 1;
+			save--;
+		}
 	}
 	else if (is_charset(flag->specifier,"oOxX") && flag->put_prefix)
 	{
 		str[i++] = '0';
 		if(is_charset(flag->specifier,"xX"))
 			str[i++] = flag->specifier == 'x' ? 'x' : 'X';
-		printf("ZALU\n");
 	}
 	if (flag->isprec && is_charset(flag->specifier,"pdDioOuUxX"))
 	{
-		while(i < (flag->precision))
+		while(i < (flag->precision - save))
 			str[i++] = '0';
-		printf("ZALU 2\n");
 	}
 	else if (flag->isprec && flag->specifier == 's')
 	{
@@ -69,28 +78,39 @@ void	put_flag(t_flag *flag, va_list va)
 	}
 	else if ((!flag->isprec) && flag->fill_zero == 1)
 	{
+		if (flag->en_sign || str[0] == '-')
+			save++;
 		while(i < (flag->width - save))
 			str[i++] = '0';
-		printf("ZALU3\n");
 	}
-	printf("ENDIF\n");
 	// add str
-	while(*tmp)
+	while(*tmp && !(flag->isprec && flag->specifier == 's'))
 		str[i++] = *tmp++;
 	str[i] = '\0';
-	printf("ZALU 4\n");
 	//print width
 	save = ft_strlen(str);
 	i = 0;
-	while (i < flag->width - save)
+	if(flag->right_just)
 	{
-		write(1," ",1);
-		i++;
+		ft_putstr(str);
+		while (i < flag->width - save)
+		{
+			write(1," ",1);
+			i++;
+		}
 	}
-	printf("ZALU5\n");
-	ft_putstr(str);
+	else
+	{
+		while (i < flag->width - save)
+		{
+			write(1," ",1);
+			i++;
+		}
+		ft_putstr(str);
+	}
+	flag->res += i + ft_strlen(str);
 	if(str[0] != '\0')
 		ft_strdel(&str);
-	if(tmp[0] != '\0')
+	if(tmp[0] != '\0' && flag->specifier != 's')
 		ft_strdel(&tmp);
 }

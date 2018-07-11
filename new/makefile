@@ -1,7 +1,7 @@
 NAME		=	libftprintf.a
 
 CC			=	gcc
-FLAGS		=	-Wall -Wextra -Werror
+FLAGS		=	-g -Wall -Wextra -Werror
 
 SRCDIR		=	src/
 OBJDIR		=	bin/
