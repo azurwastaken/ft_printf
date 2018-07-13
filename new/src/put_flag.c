@@ -10,7 +10,7 @@ int		calc_len(t_flag *flag, int str_len)
 		res += flag->en_sign ? 1 : 0;
 		res += flag->spacef ? 1 : 0;
 		res += flag->isprec ? flag->precision : 0;
-		if (flag->put_prefix && is_charset(flag->specifier,"oOxXp"))
+		if (flag->put_prefix && is_charset(flag->specifier,"oOxX"))
 			res += is_charset(flag->specifier,"xX") ? 2 : 1;
 		return (flag->width > res ? flag->width : res);
 	}
