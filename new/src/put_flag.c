@@ -10,7 +10,7 @@ int		calc_len(t_flag *flag, int str_len)
 		res += flag->en_sign ? 1 : 0;
 		res += flag->spacef ? 1 : 0;
 		res += flag->isprec ? flag->precision : 0;
-		if (flag->put_prefix && is_charset(flag->specifier,"oOxX"))
+		if (flag->put_prefix && is_charset(flag->specifier,"oOxXp"))
 			res += is_charset(flag->specifier,"xX") ? 2 : 1;
 		return (flag->width > res ? flag->width : res);
 	}
@@ -30,10 +30,11 @@ void	put_flag(t_flag *flag, va_list va)
 	char *tmp;
 	int save;
 	int i;
-
+	int nul_case;
 
 	i = 0;
 	tmp = func_hub(va, flag);
+	nul_case = flag->specifier == 'c' && tmp[0] == 0 ? 1 : 0;
 	save = ft_strlen(tmp);
 	if(!(str = (char *)malloc(sizeof(char) * (calc_len(flag, save)))))
 		return ;
@@ -56,11 +57,11 @@ void	put_flag(t_flag *flag, va_list va)
 			save--;
 		}
 	}
-	else if (is_charset(flag->specifier,"oOxX") && flag->put_prefix)
+	if (is_charset(flag->specifier,"oOxXp") && flag->put_prefix)
 	{
 		str[i++] = '0';
-		if(is_charset(flag->specifier,"xX"))
-			str[i++] = flag->specifier == 'x' ? 'x' : 'X';
+		if(is_charset(flag->specifier,"xXp"))
+			str[i++] = flag->specifier == 'X' ? 'X' : 'x';
 	}
 	if (flag->isprec && is_charset(flag->specifier,"pdDioOuUxX"))
 	{
@@ -93,7 +94,9 @@ void	put_flag(t_flag *flag, va_list va)
 	if(flag->right_just)
 	{
 		ft_putstr(str);
-		while (i < flag->width - save)
+		if(nul_case)
+			write(1,"",1);
+		while (i < flag->width - (save + nul_case))
 		{
 			write(1," ",1);
 			i++;
@@ -101,14 +104,16 @@ void	put_flag(t_flag *flag, va_list va)
 	}
 	else
 	{
-		while (i < flag->width - save)
+		while (i < flag->width - (save + nul_case))
 		{
 			write(1," ",1);
 			i++;
 		}
 		ft_putstr(str);
+		if(nul_case)
+			write(1,"",1);
 	}
-	flag->res += i + ft_strlen(str);
+	flag->res += nul_case ? i + ft_strlen(str) + 1 : i + ft_strlen(str);
 	if(str[0] != '\0')
 		ft_strdel(&str);
 	if(tmp[0] != '\0' && flag->specifier != 's')

@@ -4,9 +4,10 @@ int		ft_printf(const char *restrict format, ...)
 {
 	t_flag *flag;
 	va_list va;
+	char *save;
 
-	va_start(va, format);
 	flag = init_t_flag();
+	va_start(va, format);
 	flag->res = 0;
 	if(!format)
 		return(0);
@@ -33,14 +34,19 @@ int		ft_printf(const char *restrict format, ...)
 			flag->i = 0;
 		// commencer le traitement
 			format++;
-			format = parse_flag((char *)format, flag);
-			while(!is_charset(*format,"sSpdDioOuUxXcC%") && *format != '\0')
+			format = parse_main((char *)format, flag);
+			while(!is_charset(*format,"sSpdDioOuUxXcC%") && *format != '\0' && is_charset(*format,"sSpdDioOuUxXcC%hljz 0+-#123456789"))
 			{
-				format = parse_flag((char *)format, flag);
+				save = (char *)format;
+				format = parse_main((char *)format, flag);
+				if(!ft_strcmp(format, save))
+					format++;
 			}
 			if(is_charset(*format,"sSpdDioOuUxXcC%"))
+			{
 				flag->specifier = *format++;
-			put_flag(flag, va);
+				put_flag(flag, va);
+			}
 		}
 	}
 	flag->buffer[flag->i] = '\0';
