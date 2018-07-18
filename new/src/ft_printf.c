@@ -14,6 +14,7 @@ int		ft_printf(const char *restrict format, ...)
 	// parcourir format
 	while(*format != '\0')
 	{
+		flag = reset_flag(flag);
 	// stocker le tout dans un buffer de 4096
 		while(*format != '%' && flag->i < 4095 && *format != '\0')
 		{
@@ -45,6 +46,10 @@ int		ft_printf(const char *restrict format, ...)
 			if(is_charset(*format,"sSpdDioOuUxXcC%"))
 			{
 				flag->specifier = *format++;
+				if(flag->isprec && flag->specifier == '%')
+					flag->isprec = 0;
+				else if(flag->isprec)
+					flag->fill_zero = 0;
 				put_flag(flag, va);
 			}
 		}

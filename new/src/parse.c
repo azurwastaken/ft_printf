@@ -45,7 +45,7 @@ char	*parse_prec(char *format, t_flag *flag)
 {
 	if(*format == '.')
 	{
-		flag->fill_zero = 0;
+		//flag->fill_zero = 0;
 		format++;
 		flag->isprec = 1;
 		flag->precision = ft_atoi(format);

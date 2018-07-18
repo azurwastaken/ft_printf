@@ -19,7 +19,7 @@ char	*func_hub(va_list va, t_flag *flag)
 		flag->length = ft_strfreecopy(flag->length);
 	}
 	if (flag->specifier == '%')
-		str = percent_case(str);
+		str = percent_case(str, flag);
 	else if (flag->specifier == 's')
 		str = s_case(str, va, flag);
 	else if (flag->specifier == 'c')

@@ -10,8 +10,8 @@ int main(void)
 	// printf("\na = %d b = %d",a,b);
 	//printf("%05c\n", 42);
 	int a,b;
-	a = ft_printf("%.0p, %.p\n", 0,0);
-	b = printf("%.0p, %.p\n", 0,0);
+	a = ft_printf("%o, %ho, %hho\n", -42, -42, -42);
+	b = printf("%o, %ho, %hho\n", -42, -42, -42);
 	printf("\na = %d b = %d",a,b);
 	return(0);
 }

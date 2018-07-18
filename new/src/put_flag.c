@@ -34,6 +34,7 @@ void	put_flag(t_flag *flag, va_list va)
 
 	i = 0;
 	tmp = func_hub(va, flag);
+	//test_t_flag(flag);
 	nul_case = flag->specifier == 'c' && tmp[0] == 0 ? 1 : 0;
 	save = ft_strlen(tmp);
 	if(!(str = (char *)malloc(sizeof(char) * (calc_len(flag, save)))))
@@ -41,7 +42,7 @@ void	put_flag(t_flag *flag, va_list va)
 	if(flag->en_sign && tmp[0] != '-' && is_charset(flag->specifier,"dDi"))
 		str[i++] = '+';
 	// s'occuper des 0;
-	if (is_charset(flag->specifier,"pdDi"))
+	if (is_charset(flag->specifier,"dDi"))
 	{
 		if(tmp[0] == '-')
 		{
@@ -62,9 +63,13 @@ void	put_flag(t_flag *flag, va_list va)
 		str[i++] = '0';
 		if(is_charset(flag->specifier,"xXp"))
 			str[i++] = flag->specifier == 'X' ? 'X' : 'x';
+		if(flag->specifier == 'p')
+			save -= 2;
 	}
 	if (flag->isprec && is_charset(flag->specifier,"pdDioOuUxX"))
 	{
+		if(is_charset(flag->specifier,"xX") && flag->put_prefix)
+			save -= 2;
 		while(i < (flag->precision - save))
 			str[i++] = '0';
 	}
@@ -79,9 +84,9 @@ void	put_flag(t_flag *flag, va_list va)
 	}
 	else if ((!flag->isprec) && flag->fill_zero == 1)
 	{
-		if (flag->en_sign || str[0] == '-')
+		if (flag->en_sign || str[0] == '-' || flag->spacef)
 			save++;
-		while(i < (flag->width - save))
+		while(i < (flag->width - (save + nul_case)))
 			str[i++] = '0';
 	}
 	// add str
