@@ -36,41 +36,6 @@
 >>>> 74_precision_for_p.spec.c --- [Ok !] ......
 >>>> 75_precision_for_percent.spec [Ok !] .
 
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-TEST: percent_precision_minwdith_and_flagZero
-=====   printf_out  =====
-ret: 7
-{0000%}
-=========================
-
-===== ft_printf_out =====
-ret: 7
-{    %}
-=========================
-
-TEST: nonValidConvSpec_precision_minwdith_and_flagZero
-=====   printf_out  =====
-ret: 7
-{0000Z}
-=========================
-
-===== ft_printf_out =====
-ret: 3
-{Z}
-=========================
-
-TEST: hex_precision_and_flagSharp
-=====   printf_out  =====
-ret: 9
-{0x00001}
-=========================
-
-===== ft_printf_out =====
-ret: 7
-{0x001}
-=========================
->>>> 79_precision_mixed_with_flags [FAIL] ...FF.F..S [FAIL] char_precision_minwdith_and_flagZero -> printf("{%05.c}", 0)						jsp
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 TEST: test_zi
 =====   printf_out  =====
@@ -129,3 +94,16 @@ ret: 27
 [ ----------END OF UNIT TESTS---------- ]
 
 >>>> Result: 27/48 test suites passed. 321/396 tests passed (dots).
+
+
+
+
+
+0x7f
+0x7ff
+0xffff
+0x10ffff
+
+
+
+

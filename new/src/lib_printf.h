@@ -65,5 +65,6 @@ void	test_t_flag(t_flag *flag);
 char	*ft_convert_bde(long long num, int base, char letter);
 char	*parse_main(char *format, t_flag *flag);
 t_flag 	*reset_flag(t_flag *flag);
+void	ft_putwchar(wchar_t c);
 
 #endif
