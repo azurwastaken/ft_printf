@@ -42,7 +42,7 @@ void	put_flag(t_flag *flag, va_list va)
 	if(flag->en_sign && tmp[0] != '-' && is_charset(flag->specifier,"dDi"))
 		str[i++] = '+';
 	// s'occuper des 0;
-	if (is_charset(flag->specifier,"dDi"))
+	if (is_charset(flag->specifier,"dDi"))														
 	{
 		if(tmp[0] == '-')
 		{
