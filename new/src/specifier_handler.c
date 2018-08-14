@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   specifier_handler.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcaseaux <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/08/14 16:43:11 by mcaseaux          #+#    #+#             */
+/*   Updated: 2018/08/14 16:43:13 by mcaseaux         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lib_printf.h"
 
 char	*s_case(char *str, va_list va, t_flag *flag)
@@ -6,10 +18,10 @@ char	*s_case(char *str, va_list va, t_flag *flag)
 	//	str = ft_strdup(va_arg(va, wchar_t *));
 	/*else*/ if (flag->length == NULL)
 		str = va_arg(va, char*);
-	if(str == NULL)
+	if (str == NULL)
 	{
 		str = ft_strdup("(null)");
-		return(str);
+		return (str);
 	}
 	if (str[0] != '\0' && str[0])
 		flag->spacef = 0;
@@ -75,8 +87,8 @@ char		*d_case(char *str, va_list va, t_flag *flag)
 		str = ft_convert_bde((long long)va_arg(va, intmax_t), 10, 'd');
 	else if (ft_strcmp(flag->length, "z") == 0)
 		str = ft_convert_bde((long long)va_arg(va, size_t), 10, 'd');
-	if(str[0] == '0' && flag->isprec && flag->precision == 0)
-		return("");
+	if (str[0] == '0' && flag->isprec && flag->precision == 0)
+		return ("");
 	return (str);
 }
 
@@ -107,7 +119,7 @@ char		*oux_case(char *str, va_list va, t_flag *flag)
 	else if (flag->length == NULL)
 		str = ft_convert_base((long)va_arg(va, unsigned int), base, flag->specifier);
 	flag->put_prefix = str[0] == '0' && is_charset(flag->specifier,"xX") ? 0 : flag->put_prefix;
-	if(str[0] == '0' && (flag->isprec || (flag->specifier == 'o' && flag->put_prefix)))
+	if (str[0] == '0' && (flag->isprec || (flag->specifier == 'o' && flag->put_prefix)))
 		str[0] = '\0';
 	return (str);
 }
@@ -116,8 +128,8 @@ char		*p_case(char *str, va_list va, t_flag *flag)
 {
 	str = ft_convert_base((long)va_arg(va, void *), 16, 'x');
 	flag->put_prefix = 1;
-	if(str[0] == '0' && flag->isprec)
-		return("");
+	if (str[0] == '0' && flag->isprec)
+		return ("");
 	return (str);
 }
 
