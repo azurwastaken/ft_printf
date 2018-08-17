@@ -46,7 +46,6 @@ void	put_flag(t_flag *flag, va_list va)
 
 	i = 0;
 	tmp = func_hub(va, flag);
-	//test_t_flag(flag);
 	nul_case = flag->specifier == 'c' && tmp[0] == 0 ? 1 : 0;
 	save = ft_strlen(tmp);
 	if (!(str = (char *)malloc(sizeof(char) * (calc_len(flag, save)))))

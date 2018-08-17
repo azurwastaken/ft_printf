@@ -1,4 +1,16 @@
-int						ft_wclen(wchar_t c)
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   unicode_utils.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcaseaux <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/08/17 13:00:34 by mcaseaux          #+#    #+#             */
+/*   Updated: 2018/08/17 13:02:31 by mcaseaux         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+int				ft_wclen(wchar_t c)
 {
 	if ((MB_CUR_MAX == 1 && c > 0xFF) || c < 0 || (c >= 0xD800 && c < 0xE000))
 		return (0);
@@ -21,13 +33,13 @@ int				ft_wcslen(wchar_t *s)
 	if (!s)
 		return (-1);
 	while (s[len] != L'\0')
-    {
+	{
 		if (s[++len] == L'\0')
 			return (len);
 		if (s[++len] == L'\0')
-        	return (len);
+			return (len);
 		if (s[++len] == L'\0')
-        	return (len);
+			return (len);
 		len++;
 	}
 	return (len);
