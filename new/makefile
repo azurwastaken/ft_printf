@@ -16,6 +16,8 @@ SRCS		=	ft_printf.c\
 			put_flag.c\
 			specifier_handler.c\
 			util.c\
+			put_flag_util.c\
+			put_flag_util2.c\
 
 LIBFTSRCS	=	ft_isalnum.c\
 			ft_isalpha.c\

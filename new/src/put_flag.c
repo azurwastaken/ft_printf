@@ -42,96 +42,25 @@ void	put_flag(t_flag *flag, va_list va)
 	char	*tmp;
 	int		save;
 	int		i;
-	int		nul_case;
 
 	i = 0;
 	tmp = func_hub(va, flag);
-	nul_case = flag->specifier == 'c' && tmp[0] == 0 ? 1 : 0;
+	flag->nul_case = flag->specifier == 'c' && tmp[0] == 0 ? 1 : 0;
 	save = ft_strlen(tmp);
 	if (!(str = (char *)malloc(sizeof(char) * (calc_len(flag, save)))))
 		return ;
 	if (flag->en_sign && tmp[0] != '-' && is_charset(flag->specifier, "dDi"))
 		str[i++] = '+';
-	// s'occuper des 0;
-	if (is_charset(flag->specifier, "dDi"))
-	{
-		if (tmp[0] == '-')
-		{
-			str[0] = *tmp;
-			i = 1;
-			tmp++;
-			save -= 2;
-		}
-		else if (flag->en_sign || flag->spacef)
-		{
-			str[0] = flag->en_sign && !(flag->spacef) ? '+' : ' ';
-			i = 1;
-			save--;
-		}
-	}
-	if (is_charset(flag->specifier, "oOxXp") && flag->put_prefix)
-	{
-		str[i++] = '0';
-		if (is_charset(flag->specifier, "xXp"))
-			str[i++] = flag->specifier == 'X' ? 'X' : 'x';
-		if (flag->specifier == 'p')
-			save -= 2;
-	}
-	if (flag->isprec && is_charset(flag->specifier, "pdDioOuUxX"))
-	{
-		if (is_charset(flag->specifier, "xX") && flag->put_prefix)
-			save -= 2;
-		while (i < (flag->precision - save))
-			str[i++] = '0';
-	}
-	else if (flag->isprec && flag->specifier == 's')
-	{
-		while (i < flag->precision)
-		{
-			str[i] = tmp[i];
-			i++;
-		}
-		save = i;
-	}
-	else if ((!flag->isprec) && flag->fill_zero == 1)
-	{
-		if (flag->en_sign || str[0] == '-' || flag->spacef)
-			save++;
-		while (i < (flag->width - (save + nul_case)))
-			str[i++] = '0';
-	}
-	// add str
+	i = put_ddi_sign(flag, &tmp, str, &save);
+	put_ooxxp_prefix(flag, str, &i, &save);
+	handle_prec_num(flag, &save, &i, str);
+	if (flag->isprec && flag->specifier == 's')
+		save = handle_prec_str(flag, &i, tmp, str);
+	handle_fill_zero(flag, &save, &i, str);
 	while (*tmp && !(flag->isprec && flag->specifier == 's'))
 		str[i++] = *tmp++;
 	str[i] = '\0';
-	//print width
-	save = ft_strlen(str);
-	i = 0;
-	if (flag->right_just)
-	{
-		ft_putstr(str);
-		if (nul_case)
-			write(1, "", 1);
-		while (i < flag->width - (save + nul_case))
-		{
-			write(1, " ", 1);
-			i++;
-		}
-	}
-	else
-	{
-		while (i < flag->width - (save + nul_case))
-		{
-			write(1, " ", 1);
-			i++;
-		}
-		ft_putstr(str);
-		if (nul_case)
-			write(1, "", 1);
-	}
-	flag->res += nul_case ? i + ft_strlen(str) + 1 : i + ft_strlen(str);
-	if (str[0] != '\0')
-		ft_strdel(&str);
-	if (tmp[0] != '\0' && flag->specifier != 's')
-		ft_strdel(&tmp);
+	print_flag(&save, &i, str, flag);
+	flag->res += flag->nul_case ? i + ft_strlen(str) + 1 : i + ft_strlen(str);
+	delete_str(&tmp, &str, flag);
 }
