@@ -74,5 +74,6 @@ void			handle_fill_zero(t_flag *flag, int *save, int *i, char *str);
 void			print_flag(int *save, int *i, char *str, t_flag *flag);
 void			delete_str(char **tmp, char **str, t_flag *flag);
 void			h_case(char **format, t_flag *flag);
+char			*get_oux_str(char *str, va_list va, t_flag *flag, int base);
 
 #endif

@@ -19,6 +19,7 @@ SRCS		=	ft_printf.c\
 			put_flag_util.c\
 			put_flag_util2.c\
 			parse_length.c\
+			specifier_handler2.c\
 
 LIBFTSRCS	=	ft_isalnum.c\
 			ft_isalpha.c\
@@ -113,7 +114,7 @@ clean:
 	/bin/rm -rf $(OBJDIR)
 
 fclean: clean
-	/bin/rm -f $(NAME)
+	/bin/rm -f $(NAME) ./libft/libft.a
 
 re: fclean all
 
