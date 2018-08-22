@@ -18,6 +18,7 @@ SRCS		=	ft_printf.c\
 			util.c\
 			put_flag_util.c\
 			put_flag_util2.c\
+			parse_length.c\
 
 LIBFTSRCS	=	ft_isalnum.c\
 			ft_isalpha.c\

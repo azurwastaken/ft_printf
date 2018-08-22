@@ -66,12 +66,13 @@ char			*ft_convert_bde(long long num, int base, char letter);
 char			*parse_main(char *format, t_flag *flag);
 t_flag			*reset_flag(t_flag *flag);
 void			ft_putwchar(wchar_t c);
-int		put_ddi_sign(t_flag *flag, char **tmp, char *str, int *save);
-void put_ooxxp_prefix(t_flag *flag, char *str, int *i, int *save);
-void handle_prec_num(t_flag *flag, int *save, int *i, char *str);
-int handle_prec_str(t_flag *flag, int *i, char *tmp , char *str);
-void	handle_fill_zero(t_flag *flag, int *save, int *i, char *str);
-void	print_flag(int *save, int *i, char *str, t_flag *flag);
-void	delete_str(char **tmp, char **str, t_flag *flag);
+int				put_ddi_sign(t_flag *flag, char **tmp, char *str, int *save);
+void			put_ooxxp_prefix(t_flag *flag, char *str, int *i, int *save);
+void			handle_prec_num(t_flag *flag, int *save, int *i, char *str);
+int				handle_prec_str(t_flag *flag, int *i, char *tmp, char *str);
+void			handle_fill_zero(t_flag *flag, int *save, int *i, char *str);
+void			print_flag(int *save, int *i, char *str, t_flag *flag);
+void			delete_str(char **tmp, char **str, t_flag *flag);
+void			h_case(char **format, t_flag *flag);
 
 #endif
