@@ -3,18 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcaseaux <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mcaseaux <mcaseaux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 14:37:43 by mcaseaux          #+#    #+#             */
-/*   Updated: 2017/11/23 14:44:11 by mcaseaux         ###   ########.fr       */
+/*   Updated: 2018/08/23 14:36:10 by mcaseaux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 # include <unistd.h>
+# include <wchar.h>
 # include <stdlib.h>
 # include <string.h>
+# include <fcntl.h>
+# include <sys/types.h>
+# include <sys/uio.h>
+# include <math.h>
 
 typedef struct		s_list
 {
@@ -119,4 +124,5 @@ void				*ft_btree_search_item(t_btree *root, void *data_ref,
 int					btree_level_count(t_btree *root);
 void				ft_btree_insert_data(t_btree **root, void *item,
 		int (*cmpf)(void *, void *));
+
 #endif

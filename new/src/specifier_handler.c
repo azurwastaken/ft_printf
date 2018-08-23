@@ -3,19 +3,44 @@
 /*                                                        :::      ::::::::   */
 /*   specifier_handler.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcaseaux <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mcaseaux <mcaseaux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/14 16:43:11 by mcaseaux          #+#    #+#             */
-/*   Updated: 2018/08/14 16:43:13 by mcaseaux         ###   ########.fr       */
+/*   Updated: 2018/08/23 14:47:35 by mcaseaux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lib_printf.h"
 
+char		*ft_print_unis(va_list va)
+{
+	wchar_t		*s;
+	int 		i;
+	char 		*to_print;
+	char		*tmp;
+
+	s = va_arg(va, wchar_t*);
+	if (s)
+	{
+		to_print = ft_strnew(ft_wcslen(s));
+		i = -1;
+		while (s[++i])
+		{
+			tmp = ft_wctostr(s[i]);
+			ft_strcat(to_print, tmp);
+			free(tmp);
+		}
+		return (to_print);
+	}
+	return (NULL);
+}
+
 char		*s_case(char *str, va_list va, t_flag *flag)
 {
 	if (flag->length == NULL)
 		str = va_arg(va, char*);
+	else if (ft_strcmp(flag->length, "l") == 0)
+		str = ft_print_unis(va);
 	if (str == NULL)
 	{
 		str = ft_strdup("(null)");
@@ -26,27 +51,14 @@ char		*s_case(char *str, va_list va, t_flag *flag)
 	return (str);
 }
 
-char		*ft_print_unicode(wchar_t c, char *str)
+char		*ft_print_unic(va_list va)
 {
-	char	tab[4];
-	char	tmp[4];
-	int		i;
-	int		j;
+	wint_t		c;
+	char		*str;
 
-	i = 0;
-	while (i < 4)
-		tab[i++] = 0;
-	i = 0;
-	while (c > 0)
-	{
-		tab[i] = c & 0xff;
-		c = c >> 8;
-		i++;
-	}
-	j = 0;
-	while (i >= 0)
-		tmp[j++] = tab[i--];
-	str = ft_strdup((char *)tmp);
+	c = va_arg(va, wchar_t);
+	if(!(str = ft_wctostr(c)))
+		return(NULL);
 	return (str);
 }
 
@@ -62,7 +74,7 @@ char		*c_case(char *str, va_list va, t_flag *flag)
 		str = ft_strdup((char *)c);
 	}
 	else if (ft_strcmp(flag->length, "l") == 0)
-		str = ft_print_unicode(va_arg(va, wint_t), str);
+		str = ft_print_unic(va);
 	return (str);
 }
 

@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
+#    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: mcaseaux <mcaseaux@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/14 15:52:21 by mcaseaux          #+#    #+#              #
-#    Updated: 2017/11/23 14:43:10 by mcaseaux         ###   ########.fr        #
+#    Updated: 2018/08/23 14:36:14 by mcaseaux         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -83,73 +83,7 @@ SRCS =	ft_isalnum.c\
 			ft_btree_search_item.c\
 			ft_strtrim.c
 
-OBJS =	ft_isalnum.o\
-			ft_isalpha.o\
-			ft_isascii.o\
-			ft_lstmap.o\
-			ft_lstiter.o\
-			ft_lstdel.o\
-			ft_lstadd.o\
-			ft_lstnew.o\
-			ft_lstdelone.o\
-			ft_isdigit.o\
-			ft_isprint.o\
-			ft_bzero.o\
-			ft_memalloc.o\
-			ft_memchr.o\
-			ft_memcmp.o\
-			ft_memccpy.o\
-			ft_memcpy.o\
-			ft_memdel.o\
-			ft_memmove.o\
-			ft_memset.o\
-			ft_putchar.o\
-			ft_putchar_fd.o\
-			ft_putendl.o\
-			ft_putendl_fd.o\
-			ft_putnbr.o\
-			ft_putnbr_fd.o\
-			ft_putstr.o\
-			ft_putstr_fd.o\
-			ft_atoi.o\
-			ft_itoa.o\
-			ft_tolower.o\
-			ft_toupper.o\
-			ft_strcat.o\
-			ft_strchr.o\
-			ft_strclr.o\
-			ft_strcmp.o\
-			ft_strcpy.o\
-			ft_strdel.o\
-			ft_strdup.o\
-			ft_strequ.o\
-			ft_striter.o\
-			ft_striteri.o\
-			ft_strjoin.o\
-			ft_strjoinfree.o\
-			ft_strlcat.o\
-			ft_strlen.o\
-			ft_strmap.o\
-			ft_strmapi.o\
-			ft_strncat.o\
-			ft_strncmp.o\
-			ft_strncpy.o\
-			ft_strnequ.o\
-			ft_strnew.o\
-			ft_strnstr.o\
-			ft_strrchr.o\
-			ft_strsplit.o\
-			ft_strstr.o\
-			ft_strsub.o\
-			ft_btree_apply_by_level.o\
-			ft_btree_apply_infix.o\
-			ft_btree_apply_prefix.o\
-			ft_btree_apply_suffix.o\
-			ft_btree_create_node.o\
-			ft_btree_insert_data.o\
-			ft_btree_level_count.o\
-			ft_btree_search_item.o\
-			ft_strtrim.o
+OBJS =	$(SRCS:.c=.o)
 
 all: $(NAME)
 

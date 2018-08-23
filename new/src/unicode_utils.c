@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   unicode_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcaseaux <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mcaseaux <mcaseaux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/17 13:00:34 by mcaseaux          #+#    #+#             */
-/*   Updated: 2018/08/17 13:02:31 by mcaseaux         ###   ########.fr       */
+/*   Updated: 2018/08/23 14:35:03 by mcaseaux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "lib_printf.h"
 
 int				ft_wclen(wchar_t c)
 {
