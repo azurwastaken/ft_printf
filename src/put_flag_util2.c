@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   put_flag_util2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcaseaux <mcaseaux@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcaseaux <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/22 12:28:53 by mcaseaux          #+#    #+#             */
-/*   Updated: 2018/08/23 14:54:26 by mcaseaux         ###   ########.fr       */
+/*   Updated: 2018/08/22 12:28:55 by mcaseaux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,8 @@ void	print_flag(int *save, int *i, char *str, t_flag *flag)
 
 void	delete_str(char **tmp, char **str, t_flag *flag)
 {
-	if (str)
-		if (*str[0] != '\0')
-			ft_strdel(str);
-	if (tmp)
-		if (*tmp[0] != '\0' && flag->specifier != 's')
-			ft_strdel(tmp);
+	if (*str[0] != '\0')
+		ft_strdel(str);
+	if (*tmp[0] != '\0' && flag->specifier != 's')
+		ft_strdel(tmp);
 }

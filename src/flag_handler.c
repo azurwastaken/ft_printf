@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   flag_handler.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcaseaux <mcaseaux@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcaseaux <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/14 15:02:06 by mcaseaux          #+#    #+#             */
-/*   Updated: 2018/08/23 13:02:03 by mcaseaux         ###   ########.fr       */
+/*   Updated: 2018/08/14 15:02:18 by mcaseaux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@ char			*func_hub(va_list va, t_flag *flag)
 
 	str = NULL;
 	if (flag->specifier == 'D' || flag->specifier == 'O' ||
-		flag->specifier == 'U' || flag->specifier == 'S' ||
-		flag->specifier == 'C')
+		flag->specifier == 'U' || flag->specifier == 'C' || flag->specifier == 'S')
 	{
 		flag->specifier = ft_tolower(flag->specifier);
 		flag->length = ft_strfreecopy(flag->length);

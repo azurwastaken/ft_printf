@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lib_printf.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcaseaux <mcaseaux@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcaseaux <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 13:36:53 by mcaseaux          #+#    #+#             */
-/*   Updated: 2018/08/23 14:39:43 by mcaseaux         ###   ########.fr       */
+/*   Updated: 2018/01/29 13:53:27 by mcaseaux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 
 # include "../libft/libft.h"
 # include <stdarg.h>
+# include <wchar.h>
 # include <stdio.h>
+# include <sys/types.h>
 # include <stdint.h>
 
 typedef struct	s_flags
@@ -50,7 +52,7 @@ char			*parse_length(char *format, t_flag *flag);
 int				ft_printf(const char *restrict format, ...);
 char			*func_hub(va_list va, t_flag *flag);
 char			*s_case(char *str, va_list va, t_flag *flag);
-char			*ft_print_unicode(va_list va);
+char			*ft_print_unicode(wchar_t c, char *str);
 char			*c_case(char *str, va_list va, t_flag *flag);
 char			*d_case(char *str, va_list va, t_flag *flag);
 char			*oux_case(char *str, va_list va, t_flag *flag);
@@ -72,10 +74,8 @@ void			handle_fill_zero(t_flag *flag, int *save, int *i, char *str);
 void			print_flag(int *save, int *i, char *str, t_flag *flag);
 void			delete_str(char **tmp, char **str, t_flag *flag);
 void			h_case(char **format, t_flag *flag);
-char			*get_oux_str(char *str, va_list va, t_flag *flag, int base);
-int				ft_wcslen(wchar_t *s);
 int				ft_wclen(wchar_t c);
+int				ft_wcslen(wchar_t *s);
 char			*ft_wctostr(wchar_t c);
-char		*ft_print_unis(va_list va);
-char		*ft_print_unic(va_list va);
+
 #endif
