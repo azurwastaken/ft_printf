@@ -12,10 +12,14 @@
 
 #include "lib_printf.h"
 
-void	ft_putflagfree(t_flag *flag)
+int	ft_putflagfree(t_flag *flag)
 {
+	int res;
+
 	write(1, flag->buffer, ft_strlen(flag->buffer));
+	res = flag->res;
 	free(flag);
+	return(res);
 }
 
 char	*normal_case(t_flag *flag, char *format, va_list va)
@@ -82,7 +86,6 @@ int		ft_printf(const char *restrict format, ...)
 			format = process((char *)format, flag, va);
 	}
 	flag->buffer[flag->i] = '\0';
-	ft_putflagfree(flag);
 	va_end(va);
-	return (flag->res);
+	return (ft_putflagfree(flag));
 }

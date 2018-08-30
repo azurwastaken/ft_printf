@@ -44,6 +44,8 @@ void	delete_str(char **tmp, char **str, t_flag *flag)
 {
 	if (*str[0] != '\0')
 		ft_strdel(str);
-	if (*tmp[0] != '\0' && flag->specifier != 's')
+	if ((*tmp[0] != '\0' && flag->specifier !='s'))
 		ft_strdel(tmp);
+	if(flag->length)
+		free(flag->length); 
 }

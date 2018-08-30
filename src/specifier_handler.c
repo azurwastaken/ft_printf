@@ -157,7 +157,9 @@ char		*p_case(char *str, va_list va, t_flag *flag)
 
 char		*percent_case(char *str, t_flag *flag)
 {
-	str = ft_strdup("%\0");
+	str = malloc(sizeof(char) * 2);
+	str[0] = '%';
+	str[1] = '\0';
 	flag->isprec = 0;
 	flag->precision = 0;
 	return (str);
